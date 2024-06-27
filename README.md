@@ -9,3 +9,10 @@
 * [_UX Fundamentals for Non-UX Professionals_](./books/UX%20Fundamentals%20for%20Non-UX%20Professionals%20User%20Experience%20Principles%20for%20Managers,%20Writers,%20Designers,%20and%20Developers%20(Edward%20Stull)%20(Z-Library).pdf)
 * [_UX/UI Design 2022: A Complete Beginners to Pro Step by Step Guide_](./books/dokumen.pub_ux-ui-design-2022-a-complete-beginners-to-pro-step-by-step-guide-to-ux-ui-design-and-mastering-the-fundamentals-of-web-design-with-latest-tips-amp-techniques.epub)
 * [_UX/UI Design 2022: A Comprehensive UX & UI Guide to Master Web Design and Mobile App Sketches for Beginners and Pros_](./books/dokumen.pub_ux-ui-design-2022-a-comprehensive-ui-amp-ux-guide-to-master-web-design-and-mobile-app-sketches-for-beginners-and-pros.epub)
+
+## Design Tools
+
+### Figma
+
+* [_Design in Figma_](./books/design-tools/Figma/Designing%20in%20Figma%20(Eugene%20Fedorenko)%20(Z-Library).pdf)
+* [_The Designer's Guide to Figma_](./books/design-tools/Figma/The%20Designer’s%20Guide%20to%20Figma%20Master%20Prototyping,%20Collaboration,%20Handoff,%20and%20Workflow%20(Daniel%20Schwarz)%20(Z-Library).epub)
