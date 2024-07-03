@@ -12,7 +12,9 @@
 * [_Designing UX: Prototyping_](./books/UX/Designing%20UX%20Prototyping%20(Ben%20Coleman,%20Dan%20Goodwin)%20(Z-Library).pdf)
 * [_Design Systems Handbook_](./books/UX/Design%20Systems%20Handbook%20(Marco%20Suarez,%20Jina%20Anne,%20Katie%20Sylor-Miller%20etc.)%20(Z-Library).pdf)
 * [_Fixing Bad UX Designs_](./books/UX/Fixing%20Bad%20UX%20Designs%20(Lisandra%20Maioli)%20(Z-Library).pdf)
-* [_Laws of UX_](./books/UX/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
+* _Laws of UX_
+    * [First Edition](./books/UX/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
+    * [Second Edition](./books/UX/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
 * [_UX Fundamentals for Non-UX Professionals_](./books/UX/UX%20Fundamentals%20for%20Non-UX%20Professionals%20User%20Experience%20Principles%20for%20Managers,%20Writers,%20Designers,%20and%20Developers%20(Edward%20Stull)%20(Z-Library).pdf)
 * [_UX/UI Design 2022: A Complete Beginners to Pro Step by Step Guide_](./books/UX/dokumen.pub_ux-ui-design-2022-a-complete-beginners-to-pro-step-by-step-guide-to-ux-ui-design-and-mastering-the-fundamentals-of-web-design-with-latest-tips-amp-techniques.epub)
 * [_UX/UI Design 2022: A Comprehensive UX & UI Guide to Master Web Design and Mobile App Sketches for Beginners and Pros_](./books/UX/dokumen.pub_ux-ui-design-2022-a-comprehensive-ui-amp-ux-guide-to-master-web-design-and-mobile-app-sketches-for-beginners-and-pros.epub)
