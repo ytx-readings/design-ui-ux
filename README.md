@@ -5,6 +5,7 @@
 * [_Practical UI Patterns for Design Systems_](./books/UI/Practical%20UI%20Patterns%20for%20Design%20Systems.%20Fast-Track%20Interaction%20Design%20for%20a%20Seamless%20User%20Experience%20(Diana%20MacDonald)%20(Z-Library).pdf)
 * [_UI Design Principles_](./books/UI/UI%20Design%20Principles%20Learn%20to%20create%20beautiful%20and%20usable%20interfaces%20from%20scratch%20(Michael%20Filipiuk,%20(ed.))%20(Z-Library).pdf)
 * [_UI Design Systems Mastery_](./books/UI/UI%20Design%20Systems%20Mastery/) (5 parts)
+* [_UI Pedia_](./books/UI/UI%20Pedia/) (3 parts)
 
 ## UX
 
