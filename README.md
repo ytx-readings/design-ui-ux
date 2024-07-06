@@ -9,6 +9,7 @@
 
 ## UX
 
+* [_App Design Apprentice_](./books/UX/App%20Design%20Apprentice/) (3 parts)
 * [_Design for Developers_](./books/UX/Design%20for%20Developers%20(Adrian%20Twarog,%20George%20Moller)%20(Z-Library).pdf)
 * [_Design for How People Think_](./books/UX/Design%20for%20how%20People%20Think%20(John%20Whalen)%20(Z-Library).pdf)
 * [_Designing UX Forms: Create Forms that Don't Drive Your Users Crazy_](./books/UX/Designing%20UX%20Forms%20Create%20Forms%20That%20Don’t%20Drive%20Your%20Users%20Crazy%20(Jessica%20Enders)%20(Z-Library).pdf)
