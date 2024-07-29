@@ -22,10 +22,12 @@
     * [Second Edition](./books/UX/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
 * [_Principles of Product Design_](./books/UX/Principles%20of%20Product%20Design%20(Aarron%20Walter)%20(Z-Library).pdf)
 * [_Storytelling in Design_](./books/UX/Storytelling%20in%20Design%20Defining,%20Designing,%20and%20Selling%20Multidevice%20Products%20(Anna%20Dahlström)%20(Z-Library).epub)
+* [_Tragic Design_](./books/UX/ebin.pub_tragic-design-the-true-impact-of-bad-design-and-how-to-fix-it-0636920038887-9781491923610-149192361x.pdf)
 * [_UX Fundamentals for Non-UX Professionals_](./books/UX/UX%20Fundamentals%20for%20Non-UX%20Professionals%20User%20Experience%20Principles%20for%20Managers,%20Writers,%20Designers,%20and%20Developers%20(Edward%20Stull)%20(Z-Library).pdf)
 * [_UX/UI Design 2022: A Complete Beginners to Pro Step by Step Guide_](./books/UX/dokumen.pub_ux-ui-design-2022-a-complete-beginners-to-pro-step-by-step-guide-to-ux-ui-design-and-mastering-the-fundamentals-of-web-design-with-latest-tips-amp-techniques.epub)
 * [_UX/UI Design 2022: A Comprehensive UX & UI Guide to Master Web Design and Mobile App Sketches for Beginners and Pros_](./books/UX/dokumen.pub_ux-ui-design-2022-a-comprehensive-ui-amp-ux-guide-to-master-web-design-and-mobile-app-sketches-for-beginners-and-pros.epub)
 * [_UX Writing_](./books/UX/UX%20Writing%20Designing%20User-Centered%20Content%20[Team-IRA]%20(Jason%20C.%20K.%20Tham,%20Tharon%20Howard%20etc.)%20(Z-Library).pdf)
+* [这才是用户体验设计：人人都能看懂的产品设计书](./books/UX/这才是用户体验设计：人人都能看懂的产品设计书.pdf)
 
 ## Design Tools
 
