@@ -21,6 +21,7 @@
     * [First Edition](./books/UX/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
     * [Second Edition](./books/UX/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
 * [_Principles of Product Design_](./books/UX/Principles%20of%20Product%20Design%20(Aarron%20Walter)%20(Z-Library).pdf)
+* [_Simple and Reusable: Web, Mobile, and Interaction Design_](./books/UX/ebin.pub_simple-and-usable-web-mobile-and-interaction-design-secondnbsped-9780134778181-0134778189.pdf)
 * [_Storytelling in Design_](./books/UX/Storytelling%20in%20Design%20Defining,%20Designing,%20and%20Selling%20Multidevice%20Products%20(Anna%20Dahlström)%20(Z-Library).epub)
 * [_Tragic Design_](./books/UX/ebin.pub_tragic-design-the-true-impact-of-bad-design-and-how-to-fix-it-0636920038887-9781491923610-149192361x.pdf)
 * [_UX Fundamentals for Non-UX Professionals_](./books/UX/UX%20Fundamentals%20for%20Non-UX%20Professionals%20User%20Experience%20Principles%20for%20Managers,%20Writers,%20Designers,%20and%20Developers%20(Edward%20Stull)%20(Z-Library).pdf)
