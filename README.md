@@ -1,5 +1,12 @@
 # Design, UI & UX books
 
+## Psychology
+
+* [_Color Codes_](./books/psychology/Color%20codes%20modern%20theories%20of%20color%20in%20philosophy,%20painting%20and%20architecture,%20literature,%20music%20and%20psychology%20-%20PDF%20Room.pdf)
+* _Laws of UX_
+    * [First Edition](./books/psychology/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
+    * [Second Edition](./books/psychology/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
+
 ## UI
 
 * [_Practical UI Patterns for Design Systems_](./books/UI/Practical%20UI%20Patterns%20for%20Design%20Systems.%20Fast-Track%20Interaction%20Design%20for%20a%20Seamless%20User%20Experience%20(Diana%20MacDonald)%20(Z-Library).pdf)
@@ -17,9 +24,6 @@
 * [_DesignOps Handbook_](./books/UX/DesignOps%20Handbook%20(Kate%20Battles,%20Meredith%20Black,%20Dave%20Malouf%20etc.)%20(Z-Library).pdf)
 * [_Design Systems Handbook_](./books/UX/Design%20Systems%20Handbook%20(Marco%20Suarez,%20Jina%20Anne,%20Katie%20Sylor-Miller%20etc.)%20(Z-Library).pdf)
 * [_Fixing Bad UX Designs_](./books/UX/Fixing%20Bad%20UX%20Designs%20(Lisandra%20Maioli)%20(Z-Library).pdf)
-* _Laws of UX_
-    * [First Edition](./books/UX/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
-    * [Second Edition](./books/UX/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
 * [_Principles of Product Design_](./books/UX/Principles%20of%20Product%20Design%20(Aarron%20Walter)%20(Z-Library).pdf)
 * [_Simple and Reusable: Web, Mobile, and Interaction Design_](./books/UX/ebin.pub_simple-and-usable-web-mobile-and-interaction-design-secondnbsped-9780134778181-0134778189.pdf)
 * [_Storytelling in Design_](./books/UX/Storytelling%20in%20Design%20Defining,%20Designing,%20and%20Selling%20Multidevice%20Products%20(Anna%20Dahlström)%20(Z-Library).epub)
