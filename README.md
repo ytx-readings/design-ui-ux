@@ -2,7 +2,7 @@
 
 ## Psychology
 
-* [_Color Codes_](./books/psychology/Color%20codes%20modern%20theories%20of%20color%20in%20philosophy,%20painting%20and%20architecture,%20literature,%20music%20and%20psychology%20-%20PDF%20Room.pdf)
+* [_Color Codes_](./books/psychology/vdoc.pub_color-codes-modern-theories-of-color-in-philosophy-painting-and-architecture-literature-music-and-psychology.epub)
 * _Laws of UX_
     * [First Edition](./books/psychology/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
     * [Second Edition](./books/psychology/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
