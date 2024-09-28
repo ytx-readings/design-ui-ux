@@ -2,6 +2,7 @@
 
 ## Psychology
 
+* [_100 Things Every Designer Needs to Know About People_](./books/psychology/100%20Things%20Every%20Designer%20Needs%20to%20Know%20about%20People%20What%20Makes%20Them%20Tick%20(Susan%20Weinschenk)%20(Z-Library).pdf)
 * [_Color Codes_](./books/psychology/vdoc.pub_color-codes-modern-theories-of-color-in-philosophy-painting-and-architecture-literature-music-and-psychology.epub)
 * _Laws of UX_
     * [First Edition](./books/psychology/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
