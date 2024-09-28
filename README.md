@@ -6,6 +6,7 @@
 * _Laws of UX_
     * [First Edition](./books/psychology/Laws%20of%20UX%20-%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
     * [Second Edition](./books/psychology/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
+* [_Neuro Web Design: What Makes Them Click?_](./books/psychology/Neuro%20Web%20Design%20What%20Makes%20Them%20Click%20(Susan%20M.%20Weinschenk)%20(Z-Library).pdf)
 
 ## UI
 
