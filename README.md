@@ -28,6 +28,7 @@
 * [_Principles of Product Design_](./books/UX/Principles%20of%20Product%20Design%20(Aarron%20Walter)%20(Z-Library).pdf)
 * [_Simple and Reusable: Web, Mobile, and Interaction Design_](./books/UX/ebin.pub_simple-and-usable-web-mobile-and-interaction-design-secondnbsped-9780134778181-0134778189.pdf)
 * [_Storytelling in Design_](./books/UX/Storytelling%20in%20Design%20Defining,%20Designing,%20and%20Selling%20Multidevice%20Products%20(Anna%20Dahlström)%20(Z-Library).epub)
+* [_The Elements of User Experience_](./books/UX/The_Elements_of_User_Experience_Jesse_Ja.pdf)
 * [_Tragic Design_](./books/UX/ebin.pub_tragic-design-the-true-impact-of-bad-design-and-how-to-fix-it-0636920038887-9781491923610-149192361x.pdf)
 * [_UX Fundamentals for Non-UX Professionals_](./books/UX/UX%20Fundamentals%20for%20Non-UX%20Professionals%20User%20Experience%20Principles%20for%20Managers,%20Writers,%20Designers,%20and%20Developers%20(Edward%20Stull)%20(Z-Library).pdf)
 * [_UX/UI Design 2022: A Complete Beginners to Pro Step by Step Guide_](./books/UX/dokumen.pub_ux-ui-design-2022-a-complete-beginners-to-pro-step-by-step-guide-to-ux-ui-design-and-mastering-the-fundamentals-of-web-design-with-latest-tips-amp-techniques.epub)
