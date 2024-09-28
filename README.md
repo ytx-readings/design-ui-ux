@@ -1,6 +1,14 @@
 # Design, UI & UX books
 
-## Psychology
+## [Design Tools](./books/design-tools/)
+
+### [Figma](./books/design-tools/Figma/)
+
+* [_Design in Figma_](./books/design-tools/Figma/Designing%20in%20Figma%20(Eugene%20Fedorenko)%20(Z-Library).pdf)
+* [_Designing User Interfaces: Exploring User Interfaces, UI Elements, Design Prototypes and the Figma UI Design Tool_](<./books/design-tools/Figma/Designing User Interfaces Exploring User Interfaces, UI Elements, Design Prototypes and the Figma UI Design Tool (English... (Dario Calonaci) (Z-Library).pdf>)
+* [_The Designer's Guide to Figma_](./books/design-tools/Figma/The%20Designer’s%20Guide%20to%20Figma%20Master%20Prototyping,%20Collaboration,%20Handoff,%20and%20Workflow%20(Daniel%20Schwarz)%20(Z-Library).epub)
+
+## [Psychology](./books/psychology/)
 
 * [_100 Things Every Designer Needs to Know About People_](./books/psychology/100%20Things%20Every%20Designer%20Needs%20to%20Know%20about%20People%20What%20Makes%20Them%20Tick%20(Susan%20Weinschenk)%20(Z-Library).pdf)
 * [_Color Codes_](./books/psychology/vdoc.pub_color-codes-modern-theories-of-color-in-philosophy-painting-and-architecture-literature-music-and-psychology.epub)
@@ -9,14 +17,14 @@
     * [Second Edition](./books/psychology/Laws%20of%20UX%20Using%20Psychology%20to%20Design%20Better%20Products%20%20Services%20(Jon%20Yablonski)%20(Z-Library).pdf)
 * [_Neuro Web Design: What Makes Them Click?_](./books/psychology/Neuro%20Web%20Design%20What%20Makes%20Them%20Click%20(Susan%20M.%20Weinschenk)%20(Z-Library).pdf)
 
-## UI
+## [UI](./books/UI/)
 
 * [_Practical UI Patterns for Design Systems_](./books/UI/Practical%20UI%20Patterns%20for%20Design%20Systems.%20Fast-Track%20Interaction%20Design%20for%20a%20Seamless%20User%20Experience%20(Diana%20MacDonald)%20(Z-Library).pdf)
 * [_UI Design Principles_](./books/UI/UI%20Design%20Principles%20Learn%20to%20create%20beautiful%20and%20usable%20interfaces%20from%20scratch%20(Michael%20Filipiuk,%20(ed.))%20(Z-Library).pdf)
 * [_UI Design Systems Mastery_](./books/UI/UI%20Design%20Systems%20Mastery/) (5 parts)
 * [_UI Pedia_](./books/UI/UI%20Pedia/) (3 parts)
 
-## UX
+## [UX](./books/UX/)
 
 * [_App Design Apprentice_](./books/UX/App%20Design%20Apprentice/) (3 parts)
 * [_Design for Developers_](./books/UX/Design%20for%20Developers%20(Adrian%20Twarog,%20George%20Moller)%20(Z-Library).pdf)
@@ -36,11 +44,3 @@
 * [_UX/UI Design 2022: A Comprehensive UX & UI Guide to Master Web Design and Mobile App Sketches for Beginners and Pros_](./books/UX/dokumen.pub_ux-ui-design-2022-a-comprehensive-ui-amp-ux-guide-to-master-web-design-and-mobile-app-sketches-for-beginners-and-pros.epub)
 * [_UX Writing_](./books/UX/UX%20Writing%20Designing%20User-Centered%20Content%20[Team-IRA]%20(Jason%20C.%20K.%20Tham,%20Tharon%20Howard%20etc.)%20(Z-Library).pdf)
 * [这才是用户体验设计：人人都能看懂的产品设计书](./books/UX/这才是用户体验设计：人人都能看懂的产品设计书.pdf)
-
-## Design Tools
-
-### Figma
-
-* [_Design in Figma_](./books/design-tools/Figma/Designing%20in%20Figma%20(Eugene%20Fedorenko)%20(Z-Library).pdf)
-* [_Designing User Interfaces: Exploring User Interfaces, UI Elements, Design Prototypes and the Figma UI Design Tool_](<./books/design-tools/Figma/Designing User Interfaces Exploring User Interfaces, UI Elements, Design Prototypes and the Figma UI Design Tool (English... (Dario Calonaci) (Z-Library).pdf>)
-* [_The Designer's Guide to Figma_](./books/design-tools/Figma/The%20Designer’s%20Guide%20to%20Figma%20Master%20Prototyping,%20Collaboration,%20Handoff,%20and%20Workflow%20(Daniel%20Schwarz)%20(Z-Library).epub)
