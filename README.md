@@ -7,6 +7,7 @@
 * [_Design in Figma_](./books/design-tools/Figma/Designing%20in%20Figma%20(Eugene%20Fedorenko)%20(Z-Library).pdf)
 * [_Designing User Interfaces: Exploring User Interfaces, UI Elements, Design Prototypes and the Figma UI Design Tool_](<./books/design-tools/Figma/Designing User Interfaces Exploring User Interfaces, UI Elements, Design Prototypes and the Figma UI Design Tool (English... (Dario Calonaci) (Z-Library).pdf>)
 * [_The Designer's Guide to Figma_](./books/design-tools/Figma/The%20Designer’s%20Guide%20to%20Figma%20Master%20Prototyping,%20Collaboration,%20Handoff,%20and%20Workflow%20(Daniel%20Schwarz)%20(Z-Library).epub)
+* [_UX Design with Figma_](./books/design-tools/Figma/Tom%20Green_%20Kevin%20Brandon%20-%20UX%20Design%20with%20Figma_%20User-Centered%20Interface%20Design%20and%20Prototyping%20with%20Figma%20(Design%20Thinking)-Apress%20(2024).epub)
 
 ## [Psychology](./books/psychology/)
 
