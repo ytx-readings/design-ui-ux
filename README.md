@@ -31,6 +31,7 @@
 * [_UI Design Principles_](./books/UI/UI%20Design%20Principles%20Learn%20to%20create%20beautiful%20and%20usable%20interfaces%20from%20scratch%20(Michael%20Filipiuk,%20(ed.))%20(Z-Library).pdf)
 * [_UI Design Systems Mastery_](./books/UI/UI%20Design%20Systems%20Mastery/) (5 parts)
 * [_UI Pedia_](./books/UI/UI%20Pedia/) (3 parts)
+* [_Web UI Design for the Human Eye_](./books/UI/Web%20UI%20Design%20for%20the%20Human%20Eye%20Principles%20of%20Visual%20Consistency%20(UX%20Pin)%20(Z-Library).pdf)
 
 ## [UX](./books/UX/)
 
