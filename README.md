@@ -44,6 +44,7 @@
 * [_Designing UX: Prototyping_](./books/UX/Designing%20UX%20Prototyping%20(Ben%20Coleman,%20Dan%20Goodwin)%20(Z-Library).pdf)
 * [_DesignOps Handbook_](./books/UX/DesignOps%20Handbook%20(Kate%20Battles,%20Meredith%20Black,%20Dave%20Malouf%20etc.)%20(Z-Library).pdf)
 * [_Design Systems Handbook_](./books/UX/Design%20Systems%20Handbook%20(Marco%20Suarez,%20Jina%20Anne,%20Katie%20Sylor-Miller%20etc.)%20(Z-Library).pdf)
+* [_Don't Make Me Think, Revisited_](./books/UX/Dont%20Make%20Me%20Think,%20Revisited%20A%20Common%20Sense%20Approach%20to%20Web%20Usability%203rd%20Edition%20(Steve%20Krug)%20(Z-Library).pdf)
 * [_Fixing Bad UX Designs_](./books/UX/Fixing%20Bad%20UX%20Designs%20(Lisandra%20Maioli)%20(Z-Library).pdf)
 * [_Principles of Product Design_](./books/UX/Principles%20of%20Product%20Design%20(Aarron%20Walter)%20(Z-Library).pdf)
 * [_Simple and Reusable: Web, Mobile, and Interaction Design_](./books/UX/Simple%20and%20Usable%20(Giles%20Colborne)%20(Z-Library).pdf)
