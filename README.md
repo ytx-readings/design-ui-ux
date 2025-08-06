@@ -32,6 +32,7 @@
 * [_Designing Interfaces: Patterns for Effective Interaction Design_](./books/UI/Designing%20Interfaces/)
     * [2nd Edition](./books/UI/Designing%20Interfaces/vdoc.pub_designing-interfaces.pdf)
     * [3rd Edition](./books/UI/Designing%20Interfaces/Designing%20Interfaces%20Patterns%20for%20Effective%20Interaction%20Design%20(Tidwell,%20Jenifer,%20Brewer,%20Charles,%20Valencia%20etc.)%20(Z-Library).pdf)
+* [_Effective UI: The Art of Building Great User Experience in Software_](./books/UI/Effective%20UI%20The%20Art%20of%20Building%20Great%20User%20Experience%20in%20Software%20(Jonathan%20Anderson,%20John%20McRee,%20Robb%20Wilson)%20(Z-Library).pdf)
 * [_Practical UI_](./books/UI/Practical%20UI%20(Adham%20Dannaway)/) (3 parts)
 * [_Practical UI - 2nd Edition_](./books/UI/Practical%20UI%20-%202nd%20Edition%20(Adham%20Dannaway)/) (4 parts)
 * [_Practical UI Patterns for Design Systems_](./books/UI/Practical%20UI%20Patterns%20for%20Design%20Systems.%20Fast-Track%20Interaction%20Design%20for%20a%20Seamless%20User%20Experience%20(Diana%20MacDonald)%20(Z-Library).pdf)
