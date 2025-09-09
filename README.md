@@ -29,6 +29,7 @@
         * [_The Design of Everyday Things_](./books/psychology/Donald%20A.%20Norman/English/The%20Design%20of%20Everyday%20Things%20by%20Don%20Norman.pdf)
         * [_The Design of Future Things_](./books/psychology/Donald%20A.%20Norman/English/Design%20of%20Future%20Things,%20The%20Norman,%20Donald%20(Norman,%20Donald%20A)%20(Z-Library).pdf)
 * [_Neuro Web Design: What Makes Them Click?_](./books/psychology/Neuro%20Web%20Design%20What%20Makes%20Them%20Click%20(Susan%20M.%20Weinschenk)%20(Z-Library).pdf)
+* [设计师要懂心理学](./books/psychology/设计师要懂心理学) (4 parts)
 
 ## [UI](./books/UI/)
 
