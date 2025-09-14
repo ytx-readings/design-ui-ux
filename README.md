@@ -12,6 +12,10 @@
 * [_The Designer's Guide to Figma_](./books/design-tools/Figma/The%20Designer’s%20Guide%20to%20Figma%20Master%20Prototyping,%20Collaboration,%20Handoff,%20and%20Workflow%20(Daniel%20Schwarz)%20(Z-Library).epub)
 * [_UX Design with Figma_](./books/design-tools/Figma/UX%20Design%20with%20Figma%20User-Centered%20Interface%20Design%20and%20Prototyping%20with%20Figma%20(Design%20Thinking)%20(Tom%20Green,%20Kevin%20Brandon)%20(Z-Library).pdf)
 
+## [Graphic Design](./books/graphic-design/)
+
+* [_Graphic Design Rules_](./books/graphic-design/Graphic%20Design%20Rules%20(Stefan%20G.%20Bucher)%20(Z-Library).pdf)
+
 ## [Psychology](./books/psychology/)
 
 * [_100 Things Every Designer Needs to Know About People_](./books/psychology/100%20Things%20Every%20Designer%20Needs%20to%20Know%20about%20People%20What%20Makes%20Them%20Tick%20(Susan%20Weinschenk)%20(Z-Library).pdf)
