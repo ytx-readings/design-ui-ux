@@ -10,6 +10,7 @@
 * [_How to Learn Digital Painting_](./books/colors/How%20to%20Learn%20Digital%20Painting%20Learn%20Color%20Theory%20Painting%20Characteres,%20Prop,%20Effects,%20and%20Backgrounds%20(Mitch%20Leeuwe)%20(Z-Library).pdf)
 * [_Playing with Color_](./books/colors/Playing%20with%20Color/) (3 parts)
 * [_The Complete Guide for Choosing Colors_](./books/colors/The%20Complete%20Guide%20for%20Choosing%20Colors%20(Ran%20Segall,%20Flux%20Academy)%20(Z-Library).pdf)
+* [_The Designer's Dictionary of Color_](./books/colors/The%20Designers%20Dictionary%20of%20Color%20(Sean%20Adams)%20(Z-Library).pdf)
 
 ## [Design Tools](./books/design-tools/)
 
