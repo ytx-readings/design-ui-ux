@@ -27,6 +27,8 @@
 ## [Graphic Design](./books/graphic-design/)
 
 * [_Graphic Design Rules_](./books/graphic-design/Graphic%20Design%20Rules%20(Stefan%20G.%20Bucher)%20(Z-Library).pdf)
+* [_Grid Systems in Graphic Design_](./books/graphic-design/Mueller-Brockmann_Josef_Grid_Systems_in_Graphic_Design_Raster_Systeme_fuer_die_Visuele_Gestaltung_English_German_no_OCR.pdf)
+* [_Signage and Wayfinding Design_](./books/graphic-design/Signage%20and%20Wayfinding%20Design%20A%20Complete%20Guide%20to%20Creating%20Environmental%20Graphic%20Design%20Systems%20(Chris%20Calori,%20David%20Vanden-Eynden)%20(Z-Library).pdf)
 
 ## [Psychology](./books/psychology/)
 
