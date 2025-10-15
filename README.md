@@ -32,7 +32,6 @@
 * [_Design Evolution: Theory into Practice_](./books/graphic-design/Design%20Evolution.%20Handbook%20of%20Basic%20Design%20Principles%20Applied%20in%20Contemporary%20Design%20(Timothy%20Samara)%20(Z-Library).pdf)
 * [_Graphic Design Rules_](./books/graphic-design/Graphic%20Design%20Rules%20(Stefan%20G.%20Bucher)%20(Z-Library).pdf)
 * [_Grid Systems in Graphic Design_](./books/graphic-design/Mueller-Brockmann_Josef_Grid_Systems_in_Graphic_Design_Raster_Systeme_fuer_die_Visuele_Gestaltung_English_German_no_OCR.pdf)
-* [_Signage and Wayfinding Design_](./books/graphic-design/Signage%20and%20Wayfinding%20Design%20A%20Complete%20Guide%20to%20Creating%20Environmental%20Graphic%20Design%20Systems%20(Chris%20Calori,%20David%20Vanden-Eynden)%20(Z-Library).pdf)
 
 ## [Psychology](./books/psychology/)
 
@@ -92,3 +91,8 @@
 * [_UX/UI Design 2022: A Comprehensive UX & UI Guide to Master Web Design and Mobile App Sketches for Beginners and Pros_](./books/UX/dokumen.pub_ux-ui-design-2022-a-comprehensive-ui-amp-ux-guide-to-master-web-design-and-mobile-app-sketches-for-beginners-and-pros.epub)
 * [_UX Writing_](./books/UX/UX%20Writing%20Designing%20User-Centered%20Content%20[Team-IRA]%20(Jason%20C.%20K.%20Tham,%20Tharon%20Howard%20etc.)%20(Z-Library).pdf)
 * [这才是用户体验设计：人人都能看懂的产品设计书](./books/UX/这才是用户体验设计：人人都能看懂的产品设计书.pdf)
+
+## [Wayfinding Design](./books/wayfinding-design/)
+
+* [_Signage and Wayfinding Design_](./books/wayfinding-design/Signage%20and%20Wayfinding%20Design%20A%20Complete%20Guide%20to%20Creating%20Environmental%20Graphic%20Design%20Systems%20(Chris%20Calori,%20David%20Vanden-Eynden)%20(Z-Library).pdf)
+* [_Wayfinding Design Worldwide_](./books/wayfinding-design/Wayfinding%20Designs%20Worldwide%20(Liaoning%20Shenyang%20etc.)%20(Z-Library).pdf)
