@@ -26,6 +26,9 @@
 
 ## [Graphic Design](./books/graphic-design/)
 
+* [_Design Elements: A Graphic Style Manual_](./books/graphic-design/Design%20Elements%20A%20Graphic%20Style%20Manual%20Understanding%20the%20Rules%20and%20Knowing%20When%20to%20Break%20Them,%202nd%20Edition%20(Timothy%20Samara)%20(Z-Library).pdf)
+* [_Design Elements: A Visual Communication Manual_](./books/graphic-design/780262773-Design-Elements-Third-Edition-by-Timothy-Samara.pdf)
+* [_Design Evolution: Theory into Practice_](./books/graphic-design/Design%20Evolution.%20Handbook%20of%20Basic%20Design%20Principles%20Applied%20in%20Contemporary%20Design%20(Timothy%20Samara)%20(Z-Library).pdf)
 * [_Graphic Design Rules_](./books/graphic-design/Graphic%20Design%20Rules%20(Stefan%20G.%20Bucher)%20(Z-Library).pdf)
 * [_Grid Systems in Graphic Design_](./books/graphic-design/Mueller-Brockmann_Josef_Grid_Systems_in_Graphic_Design_Raster_Systeme_fuer_die_Visuele_Gestaltung_English_German_no_OCR.pdf)
 * [_Signage and Wayfinding Design_](./books/graphic-design/Signage%20and%20Wayfinding%20Design%20A%20Complete%20Guide%20to%20Creating%20Environmental%20Graphic%20Design%20Systems%20(Chris%20Calori,%20David%20Vanden-Eynden)%20(Z-Library).pdf)
