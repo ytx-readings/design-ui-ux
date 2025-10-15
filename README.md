@@ -11,6 +11,7 @@
 * [_Playing with Color_](./books/colors/Playing%20with%20Color/) (3 parts)
 * [_The Complete Guide for Choosing Colors_](./books/colors/The%20Complete%20Guide%20for%20Choosing%20Colors%20(Ran%20Segall,%20Flux%20Academy)%20(Z-Library).pdf)
 * [_The Designer's Dictionary of Color_](./books/colors/The%20Designers%20Dictionary%20of%20Color%20(Sean%20Adams)%20(Z-Library).pdf)
+* [配色设计原理](./books/colors/812679572-配色设计原理.pdf)
 
 ## [Design Tools](./books/design-tools/)
 
