@@ -14,6 +14,14 @@
 * [_The Designer's Dictionary of Color_](./books/colors/The%20Designers%20Dictionary%20of%20Color%20(Sean%20Adams)%20(Z-Library).pdf)
 * [配色设计原理](./books/colors/812679572-配色设计原理.pdf)
 
+## [Design Principles](./books/design-principles/)
+
+* [_Design by Nature_](./books/design-principles/Design%20by%20Nature%20Using%20Universal%20Forms%20and%20Principles%20in%20Design%20(Maggie%20Macnab)%20(Z-Library).pdf)
+* [_Ruined by Design_](./books/design-principles/Ruined_by_Design_How_Designers_Destroyed_the_World_and_What_We_Can_Do_to_Fix_It_Mike_Monteiro.epub)
+* [_Tragic Design_](./books/design-principles/ebin.pub_tragic-design-the-true-impact-of-bad-design-and-how-to-fix-it-0636920038887-9781491923610-149192361x.pdf)
+* [_Universal Principles of Design_](./books/design-principles/Universal%20Principles%20of%20Design,%20Revised%20and%20Updated%20125%20Ways%20to%20Enhance%20Usability,%20Influence%20Perception,%20Increase%20Appeal,%20Make…%20(William%20Lidwell,%20Kritina%20Holden,%20Jill%20Butler)%20(Z-Library).pdf)
+* [_Universal Principles of UX_](./books/design-principles/Universal%20Principles%20of%20Design,%20Revised%20and%20Updated%20125%20Ways%20to%20Enhance%20Usability,%20Influence%20Perception,%20Increase%20Appeal,%20Make…%20(William%20Lidwell,%20Kritina%20Holden,%20Jill%20Butler)%20(Z-Library).pdf)
+
 ## [Design Tools](./books/design-tools/)
 
 ### [Figma](./books/design-tools/Figma/)
@@ -86,7 +94,6 @@
 * [_Simple and Reusable: Web, Mobile, and Interaction Design_](./books/UX/Simple%20and%20Usable%20(Giles%20Colborne)%20(Z-Library).pdf)
 * [_Storytelling in Design_](./books/UX/Storytelling%20in%20Design%20Defining,%20Designing,%20and%20Selling%20Multidevice%20Products%20(Anna%20Dahlström)%20(Z-Library).epub)
 * [_The Elements of User Experience_](./books/UX/The_Elements_of_User_Experience_Jesse_Ja.pdf)
-* [_Tragic Design_](./books/UX/ebin.pub_tragic-design-the-true-impact-of-bad-design-and-how-to-fix-it-0636920038887-9781491923610-149192361x.pdf)
 * [_UX Fundamentals for Non-UX Professionals_](./books/UX/UX%20Fundamentals%20for%20Non-UX%20Professionals%20User%20Experience%20Principles%20for%20Managers,%20Writers,%20Designers,%20and%20Developers%20(Edward%20Stull)%20(Z-Library).pdf)
 * [_UX/UI Design 2022: A Complete Beginners to Pro Step by Step Guide_](./books/UX/dokumen.pub_ux-ui-design-2022-a-complete-beginners-to-pro-step-by-step-guide-to-ux-ui-design-and-mastering-the-fundamentals-of-web-design-with-latest-tips-amp-techniques.epub)
 * [_UX/UI Design 2022: A Comprehensive UX & UI Guide to Master Web Design and Mobile App Sketches for Beginners and Pros_](./books/UX/dokumen.pub_ux-ui-design-2022-a-comprehensive-ui-amp-ux-guide-to-master-web-design-and-mobile-app-sketches-for-beginners-and-pros.epub)
