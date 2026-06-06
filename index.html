@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saudade — Tactical Plan Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf7f2;
+      --surface: #ffffff;
+      --surface-2: #f3ece3;
+      --border: #e8ddd2;
+      --text: #2d2535;
+      --text-2: #7a6e84;
+      --text-3: #b0a8ba;
+      --primary: #8b6f9a;
+      --primary-hover: #7a5e89;
+      --primary-light: #f2ecf7;
+      --success: #4a8a6a;
+      --success-light: #eaf4ef;
+      --shadow-sm: 0 1px 4px rgba(45,37,53,0.07);
+      --shadow: 0 4px 20px rgba(45,37,53,0.10);
+      --shadow-lg: 0 8px 40px rgba(45,37,53,0.14);
+      --radius-sm: 6px;
+      --radius: 12px;
+      --radius-lg: 18px;
+      --transition: 0.18s ease;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    /* ── Tag badges ── */
+    .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; letter-spacing: .5px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; text-transform: uppercase; }
+    .tag-mvp { background: #fdf1ee; color: #b5432a; }
+    .tag-pre { background: #fdf8ec; color: #8a6a1a; }
+    .tag-post { background: #edf8f2; color: #2a7a52; }
+    .tag-ongoing { background: #edf2f8; color: #2a4a8a; }
+
+    /* ── Buttons ── */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: var(--radius-sm); font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: var(--transition); text-decoration: none; }
+    .btn:active { transform: scale(.97); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-ghost { background: transparent; color: var(--text-2); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { background: var(--surface-2); border-color: var(--text-3); }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-success:hover { background: #3a7a5a; }
+    .btn-sm { padding: 6px 13px; font-size: 13px; }
+    .btn-icon { padding: 8px; border-radius: var(--radius-sm); background: var(--surface-2); color: var(--text-2); border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: var(--transition); }
+    .btn-icon:hover { background: var(--border); }
+
+    /* ── Layout ── */
+    #app { min-height: 100vh; }
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── Nav / Header ── */
+    .app-header {
+      background: var(--surface);
+      border-bottom: 1.5px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .header-inner {
+      max-width: 960px; margin: 0 auto; padding: 0 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .header-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px; font-weight: 500; color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .header-title span { color: var(--primary); }
+    .header-nav { display: flex; gap: 8px; }
+
+    /* ── Main container ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+
+    /* ── Overall progress bar ── */
+    .overall-progress-section {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .progress-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+    .progress-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-2); }
+    .progress-count { font-size: 15px; font-weight: 600; color: var(--text); }
+    .progress-count em { color: var(--primary); font-style: normal; }
+    .progress-bar-outer {
+      height: 14px; background: var(--surface-2); border-radius: 20px; overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-inner {
+      height: 100%; border-radius: 20px;
+      background: linear-gradient(90deg, #8b6f9a 0%, #c07090 100%);
+      transition: width 0.6s cubic-bezier(.22,.68,0,1.2);
+      position: relative;
+    }
+    .progress-bar-inner::after {
+      content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 8px;
+      background: rgba(255,255,255,0.35); border-radius: 0 20px 20px 0;
+    }
+    .progress-pct { font-size: 30px; font-weight: 700; color: var(--primary); margin-top: 8px; font-variant-numeric: tabular-nums; }
+    .progress-pct small { font-size: 14px; font-weight: 400; color: var(--text-2); margin-left: 4px; }
+
+    /* ── Next Step Card ── */
+    .next-step-section { margin-bottom: 24px; }
+    .section-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-2); margin-bottom: 12px; }
+    .next-step-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary);
+      position: relative; overflow: hidden;
+    }
+    .next-step-card::before {
+      content: '';
+      position: absolute; top: 0; right: 0; width: 200px; height: 200px;
+      background: radial-gradient(circle at top right, var(--primary-light) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .next-step-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .next-step-phase { font-size: 12px; font-weight: 600; color: var(--text-2); }
+    .next-step-outcome { font-size: 13px; color: var(--text-2); margin-bottom: 8px; }
+    .next-step-text {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 21px; font-weight: 500; color: var(--text);
+      line-height: 1.4; margin-bottom: 18px;
+    }
+    .next-step-footer { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .next-step-time { font-size: 13px; color: var(--text-2); display: flex; align-items: center; gap: 4px; }
+    .timer-display {
+      font-size: 20px; font-weight: 700; color: var(--primary);
+      font-variant-numeric: tabular-nums; min-width: 60px;
+    }
+    .all-done-card {
+      background: var(--success-light);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      text-align: center;
+      border: 2px solid #b8e0cc;
+    }
+    .all-done-card h2 { font-family: 'Lora', Georgia, serif; font-size: 22px; color: var(--success); margin-bottom: 8px; }
+    .all-done-card p { color: var(--text-2); }
+
+    /* ── Phase Grid ── */
+    .phase-grid-section { margin-bottom: 24px; }
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .phase-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      border-top: 3px solid var(--phase-color, var(--primary));
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .phase-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .phase-card-number { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+    .phase-card-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+    .phase-card-bar-outer { height: 6px; background: var(--surface-2); border-radius: 10px; overflow: hidden; margin-bottom: 6px; }
+    .phase-card-bar-inner { height: 100%; border-radius: 10px; background: var(--phase-color, var(--primary)); transition: width 0.5s ease; }
+    .phase-card-count { font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+
+    /* ── Recent Activity ── */
+    .recent-section { margin-bottom: 24px; }
+    .activity-list { display: flex; flex-direction: column; gap: 8px; }
+    .activity-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .activity-check { width: 20px; height: 20px; background: var(--success-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .activity-check svg { color: var(--success); }
+    .activity-text { font-size: 13px; color: var(--text); flex: 1; line-height: 1.4; }
+    .activity-meta { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+    .activity-time { font-size: 12px; color: var(--text-3); white-space: nowrap; margin-left: auto; }
+
+    /* ── Steps View ── */
+    .steps-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .steps-title { font-family: 'Lora', Georgia, serif; font-size: 22px; font-weight: 500; }
+    .steps-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text-2); cursor: pointer; font-family: inherit; font-weight: 500; transition: var(--transition); }
+    .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .filter-btn:hover:not(.active) { border-color: var(--primary); color: var(--primary); }
+
+    /* ── Phase Section (Steps View) ── */
+    .phase-section { margin-bottom: 16px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .phase-section-header {
+      background: var(--surface);
+      padding: 18px 22px;
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer; user-select: none;
+      border-bottom: 1.5px solid var(--border);
+      transition: background var(--transition);
+    }
+    .phase-section-header:hover { background: #fdfbf8; }
+    .phase-section-header.open { border-bottom-color: transparent; }
+    .phase-badge {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--phase-color, var(--primary));
+      color: #fff; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .phase-section-name { flex: 1; }
+    .phase-section-name strong { font-size: 15px; display: block; }
+    .phase-section-name span { font-size: 12px; color: var(--text-2); }
+    .phase-section-progress { text-align: right; }
+    .phase-section-pct { font-size: 14px; font-weight: 700; color: var(--primary); }
+    .phase-section-frac { font-size: 11px; color: var(--text-3); display: block; }
+    .phase-section-chevron { color: var(--text-3); transition: transform var(--transition); }
+    .phase-section.open .phase-section-chevron { transform: rotate(180deg); }
+
+    .phase-section-body { background: var(--surface); display: none; }
+    .phase-section.open .phase-section-body { display: block; }
+
+    /* ── Outcome Group ── */
+    .outcome-group { border-bottom: 1px solid var(--border); }
+    .outcome-group:last-child { border-bottom: none; }
+    .outcome-header {
+      padding: 14px 22px;
+      display: flex; align-items: center; gap: 10px;
+      background: #fdfaf7;
+    }
+    .outcome-title { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; line-height: 1.3; }
+    .outcome-count { font-size: 11px; color: var(--text-3); white-space: nowrap; }
+
+    /* ── Step Row ── */
+    .step-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 22px 12px 42px;
+      transition: background var(--transition);
+      position: relative;
+    }
+    .step-row:hover { background: #fdfaf7; }
+    .step-row.completed { opacity: .7; }
+    .step-row.completed .step-text { text-decoration: line-through; color: var(--text-2); }
+    .step-row.in-progress { background: var(--primary-light); }
+
+    .step-checkbox {
+      width: 20px; height: 20px; border-radius: 5px;
+      border: 2px solid var(--border); background: var(--surface);
+      cursor: pointer; flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .step-checkbox:hover { border-color: var(--primary); }
+    .step-checkbox.checked { background: var(--success); border-color: var(--success); }
+    .step-checkbox.checked svg { display: block; }
+    .step-checkbox svg { display: none; }
+    .step-checkbox.in-progress { border-color: var(--primary); background: var(--primary-light); }
+
+    .step-content { flex: 1; min-width: 0; }
+    .step-text { font-size: 14px; color: var(--text); line-height: 1.45; margin-bottom: 4px; }
+    .step-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .step-est { font-size: 12px; color: var(--text-3); }
+    .step-duration { font-size: 12px; color: var(--success); font-weight: 500; }
+    .step-live-timer { font-size: 13px; font-weight: 700; color: var(--primary); font-variant-numeric: tabular-nums; }
+    .step-completed-at { font-size: 11px; color: var(--text-3); }
+
+    .step-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+    .step-start-btn {
+      font-size: 12px; padding: 4px 10px; border-radius: var(--radius-sm);
+      background: var(--primary-light); color: var(--primary);
+      border: 1.5px solid #d8c8e8; cursor: pointer; font-family: inherit; font-weight: 500;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .step-start-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .step-done-btn {
+      font-size: 12px; padding: 4px 10px; border-radius: var(--radius-sm);
+      background: var(--success-light); color: var(--success);
+      border: 1.5px solid #b8e0cc; cursor: pointer; font-family: inherit; font-weight: 500;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .step-done-btn:hover { background: var(--success); color: #fff; border-color: var(--success); }
+
+    /* ── Add custom step ── */
+    .add-step-row {
+      padding: 8px 22px 8px 42px;
+    }
+    .add-step-btn {
+      font-size: 12px; color: var(--text-3); background: none; border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm); padding: 5px 12px; cursor: pointer;
+      font-family: inherit; transition: var(--transition);
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .add-step-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(45,37,53,0.45);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity var(--transition);
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--surface); border-radius: var(--radius-lg);
+      padding: 28px; width: 100%; max-width: 480px;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(12px); transition: transform var(--transition);
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-title { font-family: 'Lora', Georgia, serif; font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+    .modal-subtitle { font-size: 13px; color: var(--text-2); margin-bottom: 20px; }
+    .modal-field { margin-bottom: 16px; }
+    .modal-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; letter-spacing: .3px; }
+    .modal-input, .modal-select, .modal-textarea {
+      width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      padding: 10px 14px; font-family: inherit; font-size: 14px; color: var(--text);
+      background: var(--surface); transition: border-color var(--transition);
+    }
+    .modal-input:focus, .modal-select:focus, .modal-textarea:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .modal-textarea { resize: vertical; min-height: 80px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+    /* ── Celebration ── */
+    .confetti-container {
+      position: fixed; inset: 0; pointer-events: none; z-index: 2000;
+      overflow: hidden;
+    }
+    .confetti-dot {
+      position: absolute; width: 8px; height: 8px; border-radius: 50%;
+      animation: confetti-fall linear forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── Toast ── */
+    .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
+    .toast {
+      background: var(--text); color: #fff; padding: 12px 18px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg);
+      animation: toast-in 0.3s ease, toast-out 0.3s ease 2.7s forwards;
+      max-width: 320px;
+    }
+    .toast.success { background: var(--success); }
+    @keyframes toast-in { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: none; } }
+    @keyframes toast-out { from { opacity: 1; } to { opacity: 0; } }
+
+    /* ── Empty state ── */
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-2); }
+    .empty-state svg { opacity: .3; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container { padding: 16px 12px 60px; }
+      .phase-grid { grid-template-columns: repeat(2, 1fr); }
+      .next-step-text { font-size: 18px; }
+      .header-inner { padding: 0 12px; }
+      .step-row { padding-left: 16px; }
+      .outcome-header { padding: 12px 16px; }
+      .add-step-row { padding-left: 16px; }
+      .phase-section-header { padding: 14px 16px; }
+    }
+
+    /* ── Utilities ── */
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .gap-2 { gap: 8px; }
+    .mt-2 { margin-top: 8px; }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast-container" id="toasts"></div>
+<div class="confetti-container" id="confetti"></div>
+
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <h2 class="modal-title">Add a Custom Step</h2>
+    <p class="modal-subtitle" id="modal-context"></p>
+    <div class="modal-field">
+      <label class="modal-label">Step description</label>
+      <textarea class="modal-textarea" id="modal-step-text" placeholder="What do you need to do? (e.g., 'Research Minnesota LLC fees')"></textarea>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Tag</label>
+      <select class="modal-select" id="modal-step-tag">
+        <option value="MVP-CRITICAL">MVP-CRITICAL</option>
+        <option value="PRE-LAUNCH">PRE-LAUNCH</option>
+        <option value="POST-LAUNCH">POST-LAUNCH</option>
+        <option value="ONGOING">ONGOING</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitCustomStep()">Add Step</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────────────────────────
+
+const PHASES = [
+  {
+    id:'p0', n:0, name:'Foundation & Setup',
+    desc:'Get your accounts, tools, and environment ready. Do this first; it unblocks everything else.',
+    color:'#9b7bb0',
+    outcomes:[
+      { id:'p0-o1', title:'Register a domain name and set up a professional email', tag:'MVP-CRITICAL', steps:[
+        {id:'p0-o1-s1', text:'Brainstorm 5 possible domain names for Saudade', est:15},
+        {id:'p0-o1-s2', text:'Check availability on a registrar like Namecheap or Cloudflare', est:15},
+        {id:'p0-o1-s3', text:'Purchase the one you like best', est:15},
+        {id:'p0-o1-s4', text:'Set up a forwarding email like hello@yourdomain.com', est:20},
+        {id:'p0-o1-s5', text:'Add the domain and email to a password manager so you never lose them', est:10},
+      ]},
+      { id:'p0-o2', title:'Create the developer accounts you\'ll need', tag:'MVP-CRITICAL', steps:[
+        {id:'p0-o2-s1', text:'Create a GitHub account if you don\'t have one', est:15},
+        {id:'p0-o2-s2', text:'Create a Vercel account and connect it to GitHub', est:15},
+        {id:'p0-o2-s3', text:'Create a Supabase account', est:15},
+        {id:'p0-o2-s4', text:'Confirm you have an Anthropic API account and can see your API key', est:15},
+        {id:'p0-o2-s5', text:'Store every login in your password manager', est:15},
+      ]},
+      { id:'p0-o3', title:'Set up your local development environment', tag:'MVP-CRITICAL', steps:[
+        {id:'p0-o3-s1', text:'Install Node.js (LTS version) on your MacBook Air', est:20},
+        {id:'p0-o3-s2', text:'Install a code editor (VS Code) if not already installed', est:15},
+        {id:'p0-o3-s3', text:'Install Git and confirm it works by running `git --version` in the terminal', est:15},
+        {id:'p0-o3-s4', text:'Create one folder on your machine called `saudade` where the project will live', est:5},
+        {id:'p0-o3-s5', text:'Write yourself a one-line note of what each tool does, for your own reference', est:15},
+      ]},
+      { id:'p0-o4', title:'Choose and confirm your technology stack', tag:'MVP-CRITICAL', steps:[
+        {id:'p0-o4-s1', text:'Re-read the one-paragraph summary of each stack component (Next.js, Vercel, Supabase, Claude, Stripe) in your architecture map', est:20},
+        {id:'p0-o4-s2', text:'Write a single sentence for each, in your own words, stating what it does', est:30},
+        {id:'p0-o4-s3', text:'Confirm the stack matches your needs: chat UI, store conversations, call Claude, take payments', est:15},
+        {id:'p0-o4-s4', text:'Write down one question you still have about the stack to research later', est:10},
+      ]},
+      { id:'p0-o5', title:'Set up version control (Git/GitHub)', tag:'MVP-CRITICAL', steps:[
+        {id:'p0-o5-s1', text:'In your project folder, run `git init`', est:5},
+        {id:'p0-o5-s2', text:'Create a free private repository on GitHub', est:15},
+        {id:'p0-o5-s3', text:'Connect your local folder to the GitHub repo following its on-screen instructions', est:20},
+        {id:'p0-o5-s4', text:'Create a file called `.gitignore` and add `.env.local` to it so secrets never get uploaded', est:15},
+        {id:'p0-o5-s5', text:'Make your first commit with the message \'initial setup\' and push it', est:15},
+      ]},
+    ]
+  },
+  {
+    id:'p1', n:1, name:'The Therapeutic Core',
+    desc:'This is the part only you can do. It is your clinical IP. Build it before any code.',
+    color:'#c0748a',
+    outcomes:[
+      { id:'p1-o1', title:'Finalize the four protocol questions', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o1-s1', text:'Write out the exact wording of Column 1\'s question', est:20},
+        {id:'p1-o1-s2', text:'Write out Columns 2, 3, and 4 questions, one per sitting (3 × 20 min)', est:60},
+        {id:'p1-o1-s3', text:'Read all four aloud in sequence and adjust wording for flow', est:20},
+        {id:'p1-o1-s4', text:'Save them in a single document titled \'Protocol v1\'', est:10},
+      ]},
+      { id:'p1-o2', title:'Extract real resistance examples from your client recordings', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o2-s1', text:'Pick one recording and listen only for moments the client got stuck', est:30},
+        {id:'p1-o2-s2', text:'Write down the exact phrases they used when avoiding or giving up', est:20},
+        {id:'p1-o2-s3', text:'Repeat for two more recordings, one per session (2 × 40 min)', est:80},
+        {id:'p1-o2-s4', text:'Group the phrases into 4–5 resistance types (e.g., overwhelmed, vague, \'I\'m done\')', est:30},
+      ]},
+      { id:'p1-o3', title:'Define what a \'specific enough\' answer looks like', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o3-s1', text:'Write 3 examples of answers that are too vague', est:20},
+        {id:'p1-o3-s2', text:'Write 3 examples of answers that are specific enough, for contrast', est:20},
+        {id:'p1-o3-s3', text:'Write one sentence describing the rule that separates them', est:15},
+      ]},
+      { id:'p1-o4', title:'Write the four clarifying questions that signal the target state', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o4-s1', text:'Write the four questions that, when answered yes, mean the user is done', est:30},
+        {id:'p1-o4-s2', text:'For each, note what a \'not yet\' answer sounds like', est:20},
+        {id:'p1-o4-s3', text:'Write one line on how the app should respond to an ambiguous edge case', est:15},
+      ]},
+      { id:'p1-o5', title:'Write example answers for when users get stuck', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o5-s1', text:'For Column 1, write 5 example answers the app could offer as prompts', est:25},
+        {id:'p1-o5-s2', text:'Do the same for Columns 2, 3, 4 (3 × 25 min)', est:75},
+        {id:'p1-o5-s3', text:'Mark these clearly as \'examples to unstick, not the right answer\'', est:10},
+      ]},
+      { id:'p1-o6', title:'Write the crisis & safety protocol (CRUCIAL — do not skip)', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o6-s1', text:'List the warning phrases that should trigger a safety response (self-harm, suicide, abuse)', est:30},
+        {id:'p1-o6-s2', text:'Find the current correct crisis resources for your launch region (e.g., 988 in the US)', est:20},
+        {id:'p1-o6-s3', text:'Write the exact, warm message the app should show when a trigger is detected', est:30},
+        {id:'p1-o6-s4', text:'Write the rule: when triggered, the app pauses the protocol and shows resources', est:15},
+        {id:'p1-o6-s5', text:'Note for later: have a clinician colleague or lawyer review this language', est:10},
+      ]},
+      { id:'p1-o7', title:'Write the system prompt, version 1', tag:'MVP-CRITICAL', steps:[
+        {id:'p1-o7-s1', text:'Open a fresh document titled \'System Prompt v1\'', est:5},
+        {id:'p1-o7-s2', text:'Write the persona and tone section: warm, non-saccharine, non-clinical', est:30},
+        {id:'p1-o7-s3', text:'Paste in the four questions and the column-advancement rules', est:20},
+        {id:'p1-o7-s4', text:'Add the \'do NOT use generic therapy questions\' instruction with examples', est:20},
+        {id:'p1-o7-s5', text:'Add the nudge-for-more-answers rule and the target-state stop rule', est:30},
+        {id:'p1-o7-s6', text:'Add the crisis/safety guardrails you wrote above', est:20},
+        {id:'p1-o7-s7', text:'Read the whole prompt aloud once and fix anything confusing', est:30},
+      ]},
+    ]
+  },
+  {
+    id:'p2', n:2, name:'Build the MVP',
+    desc:'Build the smallest version that actually works. Resist adding features. Ship ugly, then improve.',
+    color:'#5b8fb3',
+    outcomes:[
+      { id:'p2-o1', title:'Create the starter Next.js project', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o1-s1', text:'Ask your AI coding assistant to scaffold a new Next.js app in your project folder', est:20},
+        {id:'p2-o1-s2', text:'Run it locally and confirm you see the default page in your browser', est:20},
+        {id:'p2-o1-s3', text:'Commit this working starting point to GitHub', est:10},
+      ]},
+      { id:'p2-o2', title:'Build the chat interface (frontend)', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o2-s1', text:'Describe to your AI assistant the chat layout you want: message list, input box, send button', est:20},
+        {id:'p2-o2-s2', text:'Have it generate the chat component; run it and view it', est:30},
+        {id:'p2-o2-s3', text:'Adjust colors and spacing toward a calm, warm feel', est:30},
+        {id:'p2-o2-s4', text:'Confirm user messages and AI messages look visually different', est:20},
+        {id:'p2-o2-s5', text:'Commit the working chat UI', est:10},
+      ]},
+      { id:'p2-o3', title:'Build the API route that calls Claude (backend)', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o3-s1', text:'Put your Anthropic API key in a `.env.local` file (confirm `.gitignore` covers it)', est:15},
+        {id:'p2-o3-s2', text:'Have your AI assistant create the chat API route using the Anthropic SDK', est:30},
+        {id:'p2-o3-s3', text:'Paste your System Prompt v1 into the route, stored server-side', est:20},
+        {id:'p2-o3-s4', text:'Test with one message and confirm Claude replies', est:30},
+        {id:'p2-o3-s5', text:'Commit the working backend', est:10},
+      ]},
+      { id:'p2-o4', title:'Make the AI response stream token-by-token', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o4-s1', text:'Ask your AI assistant to enable streaming so text appears as it\'s generated', est:30},
+        {id:'p2-o4-s2', text:'Test it and confirm the typing effect works', est:20},
+        {id:'p2-o4-s3', text:'Commit the change', est:10},
+      ]},
+      { id:'p2-o5', title:'Connect the conversation logic (values, nudge, examples, stop)', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o5-s1', text:'Send several test messages and watch whether the app follows your protocol', est:30},
+        {id:'p2-o5-s2', text:'Note every place it drifts off-protocol', est:20},
+        {id:'p2-o5-s3', text:'Adjust the system prompt to fix the worst drift, then re-test', est:45},
+        {id:'p2-o5-s4', text:'Repeat the test-and-adjust loop once more', est:45},
+      ]},
+      { id:'p2-o6', title:'Set up the database to store conversations', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o6-s1', text:'In Supabase, create tables for users, conversations, and messages', est:40},
+        {id:'p2-o6-s2', text:'Have your AI assistant connect the app so finished conversations save to Supabase', est:45},
+        {id:'p2-o6-s3', text:'Run a test conversation and confirm it appears in the database', est:20},
+        {id:'p2-o6-s4', text:'Turn on row-level security so users see only their own data', est:30},
+      ]},
+      { id:'p2-o7', title:'Add user signup and login', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o7-s1', text:'Enable email/password auth in Supabase', est:20},
+        {id:'p2-o7-s2', text:'Have your AI assistant add login and signup screens', est:40},
+        {id:'p2-o7-s3', text:'Create a test account and confirm you can log in and out', est:20},
+        {id:'p2-o7-s4', text:'Confirm a logged-in user\'s conversations link to their account', est:20},
+      ]},
+      { id:'p2-o8', title:'Build the onboarding flow', tag:'MVP-CRITICAL', steps:[
+        {id:'p2-o8-s1', text:'Write the welcome-screen text explaining what the app does', est:25},
+        {id:'p2-o8-s2', text:'Write the screen that asks for the pet\'s name', est:15},
+        {id:'p2-o8-s3', text:'Have your AI assistant turn these into simple screens before the chat starts', est:40},
+        {id:'p2-o8-s4', text:'Walk through onboarding yourself and smooth any rough edges', est:20},
+      ]},
+    ]
+  },
+  {
+    id:'p3', n:3, name:'Safety, Legal & Compliance',
+    desc:'The unglamorous work that protects you and your users. Prepare drafts, then get professional review.',
+    color:'#c09a6e',
+    outcomes:[
+      { id:'p3-o1', title:'Write your disclaimers: \'not therapy / not medical advice\' (CRUCIAL)', tag:'MVP-CRITICAL', steps:[
+        {id:'p3-o1-s1', text:'Draft a short, clear statement that the app is a self-reflection tool, not therapy or medical care', est:30},
+        {id:'p3-o1-s2', text:'Draft a line stating it does not diagnose or treat any condition', est:15},
+        {id:'p3-o1-s3', text:'Decide where it appears: onboarding, footer, and crisis screen', est:15},
+        {id:'p3-o1-s4', text:'Note for later: have this reviewed by a lawyer familiar with your nursing license implications', est:10},
+      ]},
+      { id:'p3-o2', title:'Draft your Privacy Policy', tag:'MVP-CRITICAL', steps:[
+        {id:'p3-o2-s1', text:'List every kind of data you collect (email, conversations, payment info)', est:25},
+        {id:'p3-o2-s2', text:'List who it\'s shared with (Anthropic, Supabase, Stripe, Vercel)', est:20},
+        {id:'p3-o2-s3', text:'Use a reputable privacy-policy generator to produce a first draft', est:40},
+        {id:'p3-o2-s4', text:'Read it line by line and correct anything inaccurate about your app', est:40},
+        {id:'p3-o2-s5', text:'Note: have a lawyer review before launch', est:10},
+      ]},
+      { id:'p3-o3', title:'Draft your Terms of Service', tag:'MVP-CRITICAL', steps:[
+        {id:'p3-o3-s1', text:'Use a reputable ToS generator to create a first draft', est:40},
+        {id:'p3-o3-s2', text:'Add a clause restating the \'not therapy/medical advice\' disclaimer', est:20},
+        {id:'p3-o3-s3', text:'Add your refund policy in plain language', est:20},
+        {id:'p3-o3-s4', text:'Note: have a lawyer review before launch', est:10},
+      ]},
+      { id:'p3-o4', title:'Implement GDPR + regional privacy compliance (Europe, California, Australia)', tag:'MVP-CRITICAL', steps:[
+        {id:'p3-o4-s1', text:'Add a consent screen before the first session explaining data use and asking for opt-in', est:40},
+        {id:'p3-o4-s2', text:'Add a clear cookie/analytics consent banner that defaults to the privacy-protecting option', est:30},
+        {id:'p3-o4-s3', text:'Build a \'download my data\' button that exports the user\'s conversations', est:45},
+        {id:'p3-o4-s4', text:'Build a \'delete my account and data\' button that truly removes their records', est:45},
+        {id:'p3-o4-s5', text:'Write a one-page note on how you meet GDPR, CCPA (California), and the Australian Privacy Act', est:40},
+        {id:'p3-o4-s6', text:'Note: confirm specifics with a privacy professional before launch', est:10},
+      ]},
+      { id:'p3-o5', title:'Get Data Processing Agreements (DPAs) with your vendors', tag:'PRE-LAUNCH', steps:[
+        {id:'p3-o5-s1', text:'Find and read Anthropic\'s data-usage and zero-retention terms for the API', est:30},
+        {id:'p3-o5-s2', text:'Locate Vercel\'s and Supabase\'s DPAs / privacy terms', est:30},
+        {id:'p3-o5-s3', text:'Confirm in writing that none of them train on your users\' data', est:30},
+        {id:'p3-o5-s4', text:'Save all three agreements in one folder', est:15},
+      ]},
+      { id:'p3-o6', title:'Lock down API key and secret security', tag:'MVP-CRITICAL', steps:[
+        {id:'p3-o6-s1', text:'Confirm every secret key lives only in server environment variables, never with a NEXT_PUBLIC_ prefix', est:30},
+        {id:'p3-o6-s2', text:'In Vercel, add your keys to the encrypted environment variables dashboard', est:30},
+        {id:'p3-o6-s3', text:'Turn on GitHub secret scanning / push protection on your repo', est:20},
+        {id:'p3-o6-s4', text:'Do a final check that no key appears anywhere in your committed code', est:20},
+      ]},
+      { id:'p3-o7', title:'Add PII handling and a data-minimization habit', tag:'MVP-CRITICAL', steps:[
+        {id:'p3-o7-s1', text:'Decide what personal data you genuinely need and stop collecting the rest', est:25},
+        {id:'p3-o7-s2', text:'Have your AI assistant add a step that avoids storing unnecessary identifiers', est:40},
+        {id:'p3-o7-s3', text:'Confirm conversations are encrypted at rest (Supabase default)', est:15},
+      ]},
+      { id:'p3-o8', title:'Add age-gating', tag:'PRE-LAUNCH', steps:[
+        {id:'p3-o8-s1', text:'Decide your minimum age (commonly 18 for a mental-health tool)', est:15},
+        {id:'p3-o8-s2', text:'Add a date-of-birth or age-confirmation step at signup', est:30},
+        {id:'p3-o8-s3', text:'State the age requirement in your Terms of Service', est:10},
+      ]},
+      { id:'p3-o9', title:'Write a data-breach / incident response plan', tag:'PRE-LAUNCH', steps:[
+        {id:'p3-o9-s1', text:'Write the steps you\'d take if user data were exposed: contain, assess, notify', est:40},
+        {id:'p3-o9-s2', text:'Note the breach-notification timelines GDPR requires (within 72 hours)', est:20},
+        {id:'p3-o9-s3', text:'Save contact info for who you\'d call (lawyer, vendors)', est:15},
+      ]},
+      { id:'p3-o10', title:'Set up your business entity', tag:'PRE-LAUNCH', steps:[
+        {id:'p3-o10-s1', text:'Research whether an LLC fits your situation in Minnesota', est:40},
+        {id:'p3-o10-s2', text:'List what you\'d need to register one (name, registered agent, fee)', est:25},
+        {id:'p3-o10-s3', text:'Note: confirm structure with an accountant or attorney before filing', est:10},
+        {id:'p3-o10-s4', text:'File when ready, or note the date you\'ll do it', est:20},
+      ]},
+      { id:'p3-o11', title:'Arrange business insurance and tax setup', tag:'POST-LAUNCH', steps:[
+        {id:'p3-o11-s1', text:'List the insurance types to ask about: general and professional/E&O liability', est:30},
+        {id:'p3-o11-s2', text:'Get one or two quotes', est:45},
+        {id:'p3-o11-s3', text:'Note the tax obligations for digital-product income, including VAT/sales tax on subscriptions', est:40},
+        {id:'p3-o11-s4', text:'Note: confirm everything with an accountant', est:10},
+      ]},
+    ]
+  },
+  {
+    id:'p4', n:4, name:'Quality, Observability & Reliability',
+    desc:'Make sure the app actually does good therapy and that you can see what it\'s doing.',
+    color:'#5a9e7a',
+    outcomes:[
+      { id:'p4-o1', title:'Add observability (Phoenix tracing)', tag:'MVP-CRITICAL', steps:[
+        {id:'p4-o1-s1', text:'Create a Phoenix Cloud account and get an API key', est:20},
+        {id:'p4-o1-s2', text:'Have your AI assistant add the few lines of tracing setup to your backend', est:30},
+        {id:'p4-o1-s3', text:'Run a test conversation and confirm the trace appears in the Phoenix dashboard', est:20},
+      ]},
+      { id:'p4-o2', title:'Add error tracking', tag:'MVP-CRITICAL', steps:[
+        {id:'p4-o2-s1', text:'Create an account with an error-tracking tool (e.g., Sentry free tier)', est:20},
+        {id:'p4-o2-s2', text:'Have your AI assistant connect it so crashes get logged', est:40},
+        {id:'p4-o2-s3', text:'Trigger a deliberate test error and confirm it shows up', est:20},
+      ]},
+      { id:'p4-o3', title:'Manually review your first 50 AI responses', tag:'PRE-LAUNCH', steps:[
+        {id:'p4-o3-s1', text:'Run 10 test conversations covering easy, vague, and resistant users', est:60},
+        {id:'p4-o3-s2', text:'Read each response and mark pass or fail with a one-line reason (3 × 40 min)', est:120},
+        {id:'p4-o3-s3', text:'Keep all critiques in one spreadsheet', est:20},
+      ]},
+      { id:'p4-o4', title:'Build an error taxonomy from your reviews', tag:'PRE-LAUNCH', steps:[
+        {id:'p4-o4-s1', text:'Read your fail critiques and write free-form notes on what went wrong', est:30},
+        {id:'p4-o4-s2', text:'Group them into named categories (e.g., \'accepted vague answer\')', est:30},
+        {id:'p4-o4-s3', text:'Count how often each occurs and rank them', est:20},
+      ]},
+      { id:'p4-o5', title:'Fix the top failures by revising the system prompt', tag:'PRE-LAUNCH', steps:[
+        {id:'p4-o5-s1', text:'Take your #1 failure category and edit the system prompt to address it', est:40},
+        {id:'p4-o5-s2', text:'Re-run tests to confirm improvement', est:30},
+        {id:'p4-o5-s3', text:'Repeat for failures #2 and #3 (2 × 50 min)', est:100},
+        {id:'p4-o5-s4', text:'Save the prompt as \'System Prompt v2\'', est:10},
+      ]},
+      { id:'p4-o6', title:'Write Level-1 automated test assertions', tag:'POST-LAUNCH', steps:[
+        {id:'p4-o6-s1', text:'List 5 non-negotiable rules (e.g., crisis trigger always shows resources)', est:25},
+        {id:'p4-o6-s2', text:'Have your AI assistant write simple automated tests for each', est:45},
+        {id:'p4-o6-s3', text:'Run them and confirm they pass', est:20},
+      ]},
+      { id:'p4-o7', title:'Build an LLM-as-judge evaluator', tag:'POST-LAUNCH', steps:[
+        {id:'p4-o7-s1', text:'Write an evaluation prompt describing what \'good\' looks like, with examples', est:40},
+        {id:'p4-o7-s2', text:'Have your AI assistant set it up to score recent conversations', est:45},
+        {id:'p4-o7-s3', text:'Compare its scores to your own on the 50 you reviewed; aim for high agreement', est:40},
+      ]},
+      { id:'p4-o8', title:'Set API spend limits and cost alerts', tag:'MVP-CRITICAL', steps:[
+        {id:'p4-o8-s1', text:'In the Anthropic dashboard, set a monthly spending limit', est:20},
+        {id:'p4-o8-s2', text:'Do the same on Stripe and any paid tool', est:20},
+        {id:'p4-o8-s3', text:'Set an email alert at, say, 50% of your limit', est:15},
+      ]},
+      { id:'p4-o9', title:'Set up data backups', tag:'PRE-LAUNCH', steps:[
+        {id:'p4-o9-s1', text:'Confirm Supabase\'s automatic backup settings and frequency', est:20},
+        {id:'p4-o9-s2', text:'Schedule a recurring manual export of critical data to a safe location', est:30},
+        {id:'p4-o9-s3', text:'Test restoring from a backup once so you know it works', est:40},
+      ]},
+    ]
+  },
+  {
+    id:'p5', n:5, name:'Payments & Subscriptions',
+    desc:'How the app earns money. Keep pricing simple at first; you can change it later.',
+    color:'#a8a840',
+    outcomes:[
+      { id:'p5-o1', title:'Decide your initial pricing', tag:'PRE-LAUNCH', steps:[
+        {id:'p5-o1-s1', text:'Look at what 3 comparable apps charge', est:30},
+        {id:'p5-o1-s2', text:'Pick one simple price (e.g., a monthly subscription with a free trial)', est:20},
+        {id:'p5-o1-s3', text:'Write one sentence justifying the price by its value', est:15},
+      ]},
+      { id:'p5-o2', title:'Set up Stripe', tag:'PRE-LAUNCH', steps:[
+        {id:'p5-o2-s1', text:'Create a Stripe account and complete identity verification', est:40},
+        {id:'p5-o2-s2', text:'Create your product and price in the Stripe dashboard', est:30},
+        {id:'p5-o2-s3', text:'Store the Stripe keys in your server environment variables', est:15},
+      ]},
+      { id:'p5-o3', title:'Build the checkout and subscription flow', tag:'PRE-LAUNCH', steps:[
+        {id:'p5-o3-s1', text:'Have your AI assistant add a \'subscribe\' button that opens Stripe checkout', est:45},
+        {id:'p5-o3-s2', text:'Test a payment using Stripe\'s test mode', est:30},
+        {id:'p5-o3-s3', text:'Have it add the webhook that updates a user\'s status when they pay or cancel', est:45},
+        {id:'p5-o3-s4', text:'Test that paying unlocks access and cancelling removes it', est:30},
+      ]},
+      { id:'p5-o4', title:'Write your refund policy', tag:'PRE-LAUNCH', steps:[
+        {id:'p5-o4-s1', text:'Decide your refund terms (e.g., 14-day no-questions refund)', est:20},
+        {id:'p5-o4-s2', text:'Write it in plain language and add it to your ToS and a help page', est:25},
+      ]},
+    ]
+  },
+  {
+    id:'p6', n:6, name:'Pre-Launch Marketing Assets',
+    desc:'The pages and systems that turn strangers into users.',
+    color:'#c0785a',
+    outcomes:[
+      { id:'p6-o1', title:'Build a waitlist page', tag:'PRE-LAUNCH', steps:[
+        {id:'p6-o1-s1', text:'Write one headline, one paragraph, and one email-capture line for Saudade', est:40},
+        {id:'p6-o1-s2', text:'Use a no-code page builder or have your AI assistant make a simple page', est:45},
+        {id:'p6-o1-s3', text:'Connect the email field to your email tool', est:30},
+        {id:'p6-o1-s4', text:'Share it with 3 friends to test that signup works', est:20},
+      ]},
+      { id:'p6-o2', title:'Build the landing page', tag:'PRE-LAUNCH', steps:[
+        {id:'p6-o2-s1', text:'Write the problem the app solves, in the user\'s words', est:30},
+        {id:'p6-o2-s2', text:'Write how the app helps, in 3 short points', est:30},
+        {id:'p6-o2-s3', text:'Add a clear call-to-action button', est:15},
+        {id:'p6-o2-s4', text:'Have your AI assistant build the page; review on phone and desktop', est:45},
+      ]},
+      { id:'p6-o3', title:'Craft your core message and differentiation', tag:'PRE-LAUNCH', steps:[
+        {id:'p6-o3-s1', text:'Write one sentence: "Saudade helps [who] do [what] so they can [benefit]."', est:30},
+        {id:'p6-o3-s2', text:'Write one sentence on what makes it different (the 20–30 answer protocol)', est:20},
+        {id:'p6-o3-s3', text:'Use these everywhere: waitlist, landing page, social bios', est:20},
+      ]},
+      { id:'p6-o4', title:'Set up your email list and onboarding sequence', tag:'PRE-LAUNCH', steps:[
+        {id:'p6-o4-s1', text:'Create an account with an email tool (e.g., a free tier of a provider)', est:25},
+        {id:'p6-o4-s2', text:'Write welcome email #1 (sent at signup)', est:30},
+        {id:'p6-o4-s3', text:'Write email #2 (a tip or story, day 2)', est:30},
+        {id:'p6-o4-s4', text:'Write email #3 (a gentle re-engagement if they haven\'t used the app, day 4)', est:30},
+        {id:'p6-o4-s5', text:'Set the sequence to send automatically and confirm an unsubscribe link is present', est:30},
+      ]},
+      { id:'p6-o5', title:'Build a feedback board', tag:'PRE-LAUNCH', steps:[
+        {id:'p6-o5-s1', text:'Set up a simple feedback tool or a shared form', est:30},
+        {id:'p6-o5-s2', text:'Add a visible \'suggest a feature\' link in the app', est:20},
+        {id:'p6-o5-s3', text:'Test submitting one piece of feedback yourself', est:15},
+      ]},
+      { id:'p6-o6', title:'Set up privacy-friendly analytics', tag:'PRE-LAUNCH', steps:[
+        {id:'p6-o6-s1', text:'Choose a privacy-respecting analytics tool', est:20},
+        {id:'p6-o6-s2', text:'Decide the 3 numbers that matter most (signups, completions, return visits)', est:25},
+        {id:'p6-o6-s3', text:'Have your AI assistant install it and confirm data appears', est:40},
+      ]},
+      { id:'p6-o7', title:'Make the app discoverable (SEO / app-store basics)', tag:'POST-LAUNCH', steps:[
+        {id:'p6-o7-s1', text:'List 10 phrases a grieving pet owner might search', est:25},
+        {id:'p6-o7-s2', text:'Work the best ones into your landing-page headings and text', est:40},
+        {id:'p6-o7-s3', text:'Write a clear page title and description for search engines', est:20},
+      ]},
+    ]
+  },
+  {
+    id:'p7', n:7, name:'Audience & Beta Testing',
+    desc:'Get real humans using the app. Your community-engagement and qualitative-interview skills are gold here.',
+    color:'#6a82b8',
+    outcomes:[
+      { id:'p7-o1', title:'Recruit your first beta testers', tag:'PRE-LAUNCH', steps:[
+        {id:'p7-o1-s1', text:'Identify 3 Reddit or Facebook pet-loss communities', est:30},
+        {id:'p7-o1-s2', text:'Read each community\'s rules about sharing tools', est:20},
+        {id:'p7-o1-s3', text:'Spend a few days genuinely participating before posting anything (15 min/day)', est:15},
+        {id:'p7-o1-s4', text:'Write a warm, non-salesy post inviting testers, following the rules', est:30},
+        {id:'p7-o1-s5', text:'Personally onboard the first 5 people who say yes (5 × 20 min)', est:100},
+      ]},
+      { id:'p7-o2', title:'Conduct user research interviews', tag:'POST-LAUNCH', steps:[
+        {id:'p7-o2-s1', text:'Write 6 open questions about their grief and their experience of the app', est:30},
+        {id:'p7-o2-s2', text:'Schedule and run one 20-minute interview', est:30},
+        {id:'p7-o2-s3', text:'Repeat with 4 more users, one per session (5 × 30 min)', est:150},
+        {id:'p7-o2-s4', text:'Summarize the top 3 things you learned', est:30},
+      ]},
+      { id:'p7-o3', title:'Collect testimonials and social proof', tag:'POST-LAUNCH', steps:[
+        {id:'p7-o3-s1', text:'Ask 3 happy users for one or two sentences you can quote', est:20},
+        {id:'p7-o3-s2', text:'Get their permission to use it', est:15},
+        {id:'p7-o3-s3', text:'Add the quotes to your landing page', est:20},
+      ]},
+      { id:'p7-o4', title:'Build your personal brand on social media', tag:'ONGOING', steps:[
+        {id:'p7-o4-s1', text:'Pick one platform to start (just one)', est:15},
+        {id:'p7-o4-s2', text:'Write your bio with your one-sentence message', est:20},
+        {id:'p7-o4-s3', text:'Record one short video with your DJI Osmo about why you built Saudade', est:30},
+        {id:'p7-o4-s4', text:'Post it; reply to every comment', est:30},
+      ]},
+      { id:'p7-o5', title:'Run a simple content system', tag:'ONGOING', steps:[
+        {id:'p7-o5-s1', text:'Brainstorm 10 content ideas from your own expertise', est:30},
+        {id:'p7-o5-s2', text:'Batch-write 3 short posts in one sitting', est:45},
+        {id:'p7-o5-s3', text:'Schedule them across the week', est:20},
+        {id:'p7-o5-s4', text:'Review what got engagement and note one lesson', est:20},
+      ]},
+    ]
+  },
+  {
+    id:'p8', n:8, name:'Launch & Operate',
+    desc:'Go public and keep the lights on. You\'ve coordinated national rollouts; a launch is smaller than that.',
+    color:'#b85a5a',
+    outcomes:[
+      { id:'p8-o1', title:'Plan and run your launch', tag:'POST-LAUNCH', steps:[
+        {id:'p8-o1-s1', text:'Pick a launch date and write a simple checklist of what must be live by then', est:30},
+        {id:'p8-o1-s2', text:'Draft your launch announcement (email + social posts)', est:40},
+        {id:'p8-o1-s3', text:'Tell your waitlist first, the day before', est:20},
+        {id:'p8-o1-s4', text:'Launch, then watch your error tracker and analytics for issues', est:60},
+        {id:'p8-o1-s5', text:'Write down the first 3 problems users hit and fix the worst one', est:45},
+      ]},
+      { id:'p8-o2', title:'Set up customer support', tag:'POST-LAUNCH', steps:[
+        {id:'p8-o2-s1', text:'Create a support email or simple help widget', est:25},
+        {id:'p8-o2-s2', text:'Write 5 likely FAQs with answers', est:40},
+        {id:'p8-o2-s3', text:'Decide a daily time you\'ll check and reply to support', est:15},
+      ]},
+      { id:'p8-o3', title:'Measure product-market fit', tag:'POST-LAUNCH', steps:[
+        {id:'p8-o3-s1', text:'Track how many users complete a full protocol session', est:20},
+        {id:'p8-o3-s2', text:'Track how many return within a week', est:20},
+        {id:'p8-o3-s3', text:'After 4 weeks, write one honest paragraph: is this resonating?', est:30},
+      ]},
+      { id:'p8-o4', title:'Build partnerships and outreach', tag:'ONGOING', steps:[
+        {id:'p8-o4-s1', text:'List 5 organizations or creators in the pet-loss space', est:30},
+        {id:'p8-o4-s2', text:'Write one short, genuine outreach message', est:20},
+        {id:'p8-o4-s3', text:'Send it to one contact per week (15 min/week)', est:15},
+      ]},
+    ]
+  },
+  {
+    id:'p9', n:9, name:'Scale & Sustain',
+    desc:'The long game. These keep you and the business healthy after launch.',
+    color:'#5a9a5a',
+    outcomes:[
+      { id:'p9-o1', title:'Run a weekly improvement cycle', tag:'ONGOING', steps:[
+        {id:'p9-o1-s1', text:'Each week, review Phoenix traces and your LLM-judge scores', est:30},
+        {id:'p9-o1-s2', text:'Pick the single most common new failure', est:20},
+        {id:'p9-o1-s3', text:'Update the system prompt, version it, and redeploy', est:40},
+      ]},
+      { id:'p9-o2', title:'Manage finances and runway', tag:'ONGOING', steps:[
+        {id:'p9-o2-s1', text:'Set up a simple spreadsheet tracking income and expenses', est:40},
+        {id:'p9-o2-s2', text:'Each week, update it and note how many months of runway remain', est:20},
+        {id:'p9-o2-s3', text:'Each month, review whether revenue is covering costs', est:30},
+      ]},
+      { id:'p9-o3', title:'Manage your time with the 5-minute rule and weekly priorities', tag:'ONGOING', steps:[
+        {id:'p9-o3-s1', text:'Each morning, do at least 5 minutes on the app, no matter what', est:5},
+        {id:'p9-o3-s2', text:'Each Sunday, choose the 3 outcomes you\'ll move forward that week', est:20},
+        {id:'p9-o3-s3', text:'Protect one focused block per day for the most important one', est:60},
+      ]},
+      { id:'p9-o4', title:'Build workflows for your AI agent', tag:'ONGOING', steps:[
+        {id:'p9-o4-s1', text:'Pick one repetitive task (e.g., drafting social posts)', est:15},
+        {id:'p9-o4-s2', text:'Write step-by-step instructions an AI agent could follow', est:40},
+        {id:'p9-o4-s3', text:'Test the workflow and refine the instructions', est:40},
+      ]},
+      { id:'p9-o5', title:'Scale and localize to new languages', tag:'ONGOING', steps:[
+        {id:'p9-o5-s1', text:'After traction, pick one new language you speak (Spanish or Portuguese)', est:15},
+        {id:'p9-o5-s2', text:'Translate and culturally adapt the system prompt and key screens (3 × 45 min)', est:135},
+        {id:'p9-o5-s3', text:'Test with one native-speaking user', est:30},
+      ]},
+      { id:'p9-o6', title:'Stay current with AI tools and knowledge', tag:'ONGOING', steps:[
+        {id:'p9-o6-s1', text:'Choose 2 trusted sources to follow (e.g., a newsletter, a researcher)', est:20},
+        {id:'p9-o6-s2', text:'Block 30 minutes weekly to read and note one useful idea', est:30},
+      ]},
+      { id:'p9-o7', title:'Sustain your own resilience and morale', tag:'ONGOING', steps:[
+        {id:'p9-o7-s1', text:'Run your own Cognitive Shift Protocol whenever resistance spikes', est:30},
+        {id:'p9-o7-s2', text:'Re-read one of your mindset documents on hard days', est:15},
+        {id:'p9-o7-s3', text:'Track a visible "days I made contact with the app" chain and protect it', est:5},
+      ]},
+    ]
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────────────────
+
+const STORAGE_KEY = 'saudade-tracker-v1';
+let STATE = { steps: {}, customSteps: [] };
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) STATE = JSON.parse(saved);
+  } catch(e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE)); } catch(e) {}
+}
+
+function stepState(id) {
+  return STATE.steps[id] || { completed: false, startedAt: null, completedAt: null, durationMins: null };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+function getAllCanonicalSteps() {
+  const all = [];
+  for (const phase of PHASES) {
+    for (const outcome of phase.outcomes) {
+      for (const step of outcome.steps) {
+        all.push({ ...step, phaseId: phase.id, phaseName: phase.name, phaseN: phase.n, phaseColor: phase.color, outcomeId: outcome.id, outcomeTitle: outcome.title, tag: outcome.tag });
+      }
+    }
+  }
+  return all;
+}
+
+function getAllCustomSteps() {
+  return STATE.customSteps || [];
+}
+
+function getPhaseStats(phaseId) {
+  const phase = PHASES.find(p => p.id === phaseId);
+  if (!phase) return { total: 0, done: 0 };
+  let total = 0, done = 0;
+  for (const o of phase.outcomes) {
+    for (const s of o.steps) {
+      total++;
+      if (stepState(s.id).completed) done++;
+    }
+    // custom steps in this phase
+    for (const cs of getAllCustomSteps().filter(cs => cs.phaseId === phaseId && cs.outcomeId === o.id)) {
+      total++;
+      if (stepState(cs.id).completed) done++;
+    }
+  }
+  return { total, done };
+}
+
+function getOverallStats() {
+  let total = 0, done = 0;
+  for (const p of PHASES) {
+    const s = getPhaseStats(p.id);
+    total += s.total; done += s.done;
+  }
+  return { total, done };
+}
+
+function getNextStep() {
+  for (const phase of PHASES) {
+    for (const outcome of phase.outcomes) {
+      const stepsInOutcome = [
+        ...outcome.steps,
+        ...getAllCustomSteps().filter(cs => cs.phaseId === phase.id && cs.outcomeId === outcome.id),
+      ];
+      for (const step of stepsInOutcome) {
+        const ss = stepState(step.id);
+        if (!ss.completed) {
+          return { ...step, phaseId: phase.id, phaseName: phase.name, phaseN: phase.n, phaseColor: phase.color, outcomeId: outcome.id, outcomeTitle: outcome.title, tag: step.tag || outcome.tag };
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function getRecentlyCompleted(n = 5) {
+  const all = getAllCanonicalSteps().concat(
+    getAllCustomSteps().map(cs => {
+      const phase = PHASES.find(p => p.id === cs.phaseId);
+      return { ...cs, phaseName: phase ? phase.name : '', phaseColor: phase ? phase.color : '#888' };
+    })
+  );
+  return all
+    .filter(s => stepState(s.id).completed)
+    .map(s => ({ ...s, ...stepState(s.id) }))
+    .sort((a, b) => (b.completedAt || 0) - (a.completedAt || 0))
+    .slice(0, n);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+let liveTimerInterval = null;
+let liveTimerStepId = null;
+
+function startStep(stepId) {
+  if (!STATE.steps[stepId]) STATE.steps[stepId] = {};
+  const ss = STATE.steps[stepId];
+  if (ss.completed) return;
+  if (ss.startedAt) return; // already started
+  ss.startedAt = Date.now();
+  saveState();
+  startLiveTimer(stepId);
+  render();
+}
+
+function completeStep(stepId) {
+  if (!STATE.steps[stepId]) STATE.steps[stepId] = {};
+  const ss = STATE.steps[stepId];
+  ss.completed = true;
+  ss.completedAt = Date.now();
+  if (ss.startedAt && !ss.durationMins) {
+    ss.durationMins = Math.max(1, Math.round((ss.completedAt - ss.startedAt) / 60000));
+  }
+  stopLiveTimer();
+  saveState();
+  showConfetti();
+  showToast('Step complete! ✓', 'success');
+  render();
+}
+
+function toggleStep(stepId) {
+  if (!STATE.steps[stepId]) STATE.steps[stepId] = {};
+  const ss = STATE.steps[stepId];
+  if (ss.completed) {
+    ss.completed = false;
+    ss.completedAt = null;
+  } else {
+    ss.completed = true;
+    ss.completedAt = ss.completedAt || Date.now();
+    if (!ss.durationMins && ss.startedAt) {
+      ss.durationMins = Math.max(1, Math.round((ss.completedAt - ss.startedAt) / 60000));
+    }
+    if (!ss.completed) {} else { showConfetti(); }
+  }
+  saveState();
+  render();
+}
+
+function startLiveTimer(stepId) {
+  stopLiveTimer();
+  liveTimerStepId = stepId;
+  liveTimerInterval = setInterval(() => {
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function stopLiveTimer() {
+  if (liveTimerInterval) { clearInterval(liveTimerInterval); liveTimerInterval = null; }
+  liveTimerStepId = null;
+}
+
+function formatElapsed(startedAt) {
+  const secs = Math.floor((Date.now() - startedAt) / 1000);
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function formatDuration(mins) {
+  if (!mins) return '';
+  if (mins < 60) return `${mins}m`;
+  return `${Math.floor(mins/60)}h ${mins%60}m`;
+}
+
+function formatDate(ts) {
+  if (!ts) return '';
+  const d = new Date(ts);
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric' }) + ' at ' + d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+}
+
+function updateTimerDisplay() {
+  if (!liveTimerStepId) return;
+  const ss = stepState(liveTimerStepId);
+  if (!ss.startedAt) return;
+  const elapsed = formatElapsed(ss.startedAt);
+  // Update dashboard timer
+  const dtEl = document.getElementById('dash-timer-display');
+  if (dtEl) dtEl.textContent = elapsed;
+  // Update steps view timer
+  const stEl = document.getElementById(`timer-${liveTimerStepId}`);
+  if (stEl) stEl.textContent = elapsed;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CUSTOM STEPS
+// ─────────────────────────────────────────────────────────────────────────────
+
+let pendingCustomStep = null;
+
+function openAddStepModal(phaseId, outcomeId) {
+  const phase = PHASES.find(p => p.id === phaseId);
+  const outcome = phase ? phase.outcomes.find(o => o.id === outcomeId) : null;
+  pendingCustomStep = { phaseId, outcomeId };
+  document.getElementById('modal-context').textContent = outcome ? `Adding to: ${outcome.title}` : '';
+  document.getElementById('modal-step-text').value = '';
+  document.getElementById('modal-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('modal-step-text').focus(), 100);
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  pendingCustomStep = null;
+}
+
+function submitCustomStep() {
+  const text = document.getElementById('modal-step-text').value.trim();
+  if (!text) { showToast('Please enter a step description'); return; }
+  const tag = document.getElementById('modal-step-tag').value;
+  const id = 'custom-' + Date.now();
+  if (!STATE.customSteps) STATE.customSteps = [];
+  STATE.customSteps.push({ id, phaseId: pendingCustomStep.phaseId, outcomeId: pendingCustomStep.outcomeId, text, tag });
+  STATE.steps[id] = { completed: false, startedAt: null, completedAt: null, durationMins: null };
+  saveState();
+  document.getElementById('modal-overlay').classList.remove('open');
+  pendingCustomStep = null;
+  showToast('Custom step added!', 'success');
+  render();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UI HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+function tagBadge(tag) {
+  const cls = tag === 'MVP-CRITICAL' ? 'tag-mvp' : tag === 'PRE-LAUNCH' ? 'tag-pre' : tag === 'POST-LAUNCH' ? 'tag-post' : 'tag-ongoing';
+  const label = tag === 'MVP-CRITICAL' ? '⚡ MVP' : tag === 'PRE-LAUNCH' ? '🔖 Pre-launch' : tag === 'POST-LAUNCH' ? '🚀 Post-launch' : '🔄 Ongoing';
+  return `<span class="tag ${cls}">${label}</span>`;
+}
+
+function checkIcon() {
+  return `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+
+function showToast(msg, type = '') {
+  const c = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = 'toast' + (type ? ` ${type}` : '');
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), 3100);
+}
+
+function showConfetti() {
+  const c = document.getElementById('confetti');
+  const colors = ['#9b7bb0','#c0748a','#5b8fb3','#c09a6e','#5a9e7a','#e8b4a0','#f2d06b'];
+  for (let i = 0; i < 30; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'confetti-dot';
+    dot.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.5+Math.random()*1.5}s;animation-delay:${Math.random()*0.5}s;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>0.5?'50%':'3px'}`;
+    c.appendChild(dot);
+    setTimeout(() => dot.remove(), 3000);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VIEWS
+// ─────────────────────────────────────────────────────────────────────────────
+
+let currentView = 'dashboard';
+let stepsFilter = 'all';
+let openPhases = new Set(['p0']);
+
+function switchView(v) {
+  currentView = v;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function togglePhase(phaseId) {
+  if (openPhases.has(phaseId)) openPhases.delete(phaseId);
+  else openPhases.add(phaseId);
+  renderStepsView();
+}
+
+function setFilter(f) {
+  stepsFilter = f;
+  renderStepsView();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────────────────────────────
+
+function render() {
+  const app = document.getElementById('app');
+  app.innerHTML = currentView === 'dashboard' ? renderDashboard() : renderStepsHTML();
+  attachEvents();
+  if (liveTimerStepId) updateTimerDisplay();
+}
+
+function renderDashboard() {
+  const { total, done } = getOverallStats();
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const next = getNextStep();
+  const recent = getRecentlyCompleted(4);
+
+  const overallSection = `
+    <div class="overall-progress-section">
+      <div class="progress-header">
+        <span class="progress-label">Overall Progress</span>
+        <span class="progress-count"><em>${done}</em> of ${total} steps complete</span>
+      </div>
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" style="width:${pct}%"></div>
+      </div>
+      <div class="progress-pct">${pct}%<small>complete</small></div>
+    </div>`;
+
+  let nextSection = '';
+  if (next) {
+    const ss = stepState(next.id);
+    const inProgress = ss.startedAt && !ss.completed;
+    nextSection = `
+      <div class="next-step-section">
+        <div class="section-title">Your next step</div>
+        <div class="next-step-card" style="border-left-color:${next.phaseColor}">
+          <div class="next-step-meta">
+            <span class="next-step-phase" style="color:${next.phaseColor}">Phase ${next.phaseN} · ${next.phaseName}</span>
+            ${tagBadge(next.tag)}
+          </div>
+          <div class="next-step-outcome">${next.outcomeTitle}</div>
+          <div class="next-step-text">${next.text}</div>
+          <div class="next-step-footer">
+            ${next.est ? `<span class="next-step-time">⏱ ~${next.est} min</span>` : ''}
+            ${inProgress
+              ? `<span class="timer-display" id="dash-timer-display">${formatElapsed(ss.startedAt)}</span>
+                 <button class="btn btn-success" onclick="completeStep('${next.id}')">✓ Mark Complete</button>`
+              : `<button class="btn btn-primary" onclick="startStep('${next.id}')">▶ Start Timer</button>
+                 <button class="btn btn-ghost" onclick="completeStep('${next.id}')">✓ Done (no timer)</button>`
+            }
+          </div>
+        </div>
+      </div>`;
+  } else {
+    nextSection = `
+      <div class="next-step-section">
+        <div class="all-done-card">
+          <h2>🎉 All done, Katya!</h2>
+          <p>Every step in the Saudade Tactical Plan is complete. This is the whole staircase — you climbed it.</p>
+        </div>
+      </div>`;
+  }
+
+  const phaseGrid = PHASES.map(phase => {
+    const { total: pt, done: pd } = getPhaseStats(phase.id);
+    const ppct = pt ? Math.round((pd/pt)*100) : 0;
+    return `
+      <div class="phase-card" style="--phase-color:${phase.color}" onclick="switchView('steps'); setTimeout(()=>{openPhase('${phase.id}')},50)">
+        <div class="phase-card-number">Phase ${phase.n}</div>
+        <div class="phase-card-name">${phase.name}</div>
+        <div class="phase-card-bar-outer"><div class="phase-card-bar-inner" style="width:${ppct}%"></div></div>
+        <div class="phase-card-count">${pd} / ${pt} · ${ppct}%</div>
+      </div>`;
+  }).join('');
+
+  const recentItems = recent.length
+    ? recent.map(s => `
+        <div class="activity-item">
+          <div class="activity-check">${checkIcon()}</div>
+          <div class="activity-text">
+            ${s.text}
+            <div class="activity-meta" style="color:${s.phaseColor}">${s.phaseName}</div>
+          </div>
+          ${s.durationMins ? `<div class="activity-time">${formatDuration(s.durationMins)}</div>` : ''}
+        </div>`).join('')
+    : `<div class="empty-state"><p>No completed steps yet — your first one is waiting above.</p></div>`;
+
+  return `
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="header-title">🌿 <span>Saudade</span> Tactical Plan</div>
+        <nav class="header-nav">
+          <button class="btn btn-ghost btn-sm" onclick="switchView('steps')">All Steps →</button>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      ${overallSection}
+      ${nextSection}
+      <div class="phase-grid-section">
+        <div class="section-title">Phase progress</div>
+        <div class="phase-grid">${phaseGrid}</div>
+      </div>
+      <div class="recent-section">
+        <div class="section-title">Recently completed</div>
+        <div class="activity-list">${recentItems}</div>
+      </div>
+    </main>`;
+}
+
+function renderStepsHTML() {
+  const filterBtns = ['all','MVP-CRITICAL','PRE-LAUNCH','POST-LAUNCH','ONGOING'].map(f =>
+    `<button class="filter-btn ${stepsFilter===f?'active':''}" onclick="setFilter('${f}')">${
+      f==='all'?'All':f==='MVP-CRITICAL'?'⚡ MVP':f==='PRE-LAUNCH'?'🔖 Pre-launch':f==='POST-LAUNCH'?'🚀 Post-launch':'🔄 Ongoing'
+    }</button>`
+  ).join('');
+
+  const phaseSections = PHASES.map(phase => {
+    const { total: pt, done: pd } = getPhaseStats(phase.id);
+    const ppct = pt ? Math.round((pd/pt)*100) : 0;
+    const isOpen = openPhases.has(phase.id);
+
+    // Filter outcomes/steps
+    const filteredOutcomes = phase.outcomes.map(outcome => {
+      const canonicalSteps = outcome.steps.filter(s => stepsFilter === 'all' || outcome.tag === stepsFilter || s.tag === stepsFilter);
+      const customSteps = getAllCustomSteps().filter(cs => cs.phaseId === phase.id && cs.outcomeId === outcome.id && (stepsFilter === 'all' || cs.tag === stepsFilter));
+      if (!canonicalSteps.length && !customSteps.length && stepsFilter !== 'all') return null;
+      return { outcome, canonicalSteps: outcome.steps, customSteps };
+    }).filter(Boolean);
+
+    if (!filteredOutcomes.length) return '';
+
+    const outcomesHTML = filteredOutcomes.map(({ outcome, canonicalSteps, customSteps }) => {
+      const allSteps = [
+        ...canonicalSteps,
+        ...customSteps.map(cs => ({ ...cs, tag: cs.tag })),
+      ].filter(s => stepsFilter === 'all' || (s.tag || outcome.tag) === stepsFilter);
+
+      if (!allSteps.length) return '';
+
+      const outcomeDone = allSteps.filter(s => stepState(s.id).completed).length;
+      const stepsHTML = allSteps.map(step => {
+        const ss = stepState(step.id);
+        const tag = step.tag || outcome.tag;
+        const inProgress = ss.startedAt && !ss.completed;
+        return `
+          <div class="step-row ${ss.completed?'completed':''} ${inProgress?'in-progress':''}" id="row-${step.id}">
+            <div class="step-checkbox ${ss.completed?'checked':''} ${inProgress&&!ss.completed?'in-progress':''}"
+                 onclick="toggleStep('${step.id}')">
+              ${checkIcon()}
+            </div>
+            <div class="step-content">
+              <div class="step-text">${step.text}</div>
+              <div class="step-meta">
+                ${step.est ? `<span class="step-est">~${step.est} min</span>` : ''}
+                ${ss.durationMins ? `<span class="step-duration">✓ ${formatDuration(ss.durationMins)}</span>` : ''}
+                ${inProgress ? `<span class="step-live-timer" id="timer-${step.id}">${formatElapsed(ss.startedAt)}</span>` : ''}
+                ${ss.completedAt ? `<span class="step-completed-at">${formatDate(ss.completedAt)}</span>` : ''}
+                ${tagBadge(tag)}
+              </div>
+            </div>
+            <div class="step-actions">
+              ${!ss.completed && !inProgress ? `<button class="step-start-btn" onclick="startStep('${step.id}')">▶ Start</button>` : ''}
+              ${inProgress ? `<button class="step-done-btn" onclick="completeStep('${step.id}')">✓ Done</button>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+
+      return `
+        <div class="outcome-group">
+          <div class="outcome-header">
+            <div class="outcome-title">${outcome.title}</div>
+            <span class="outcome-count">${outcomeDone}/${allSteps.length}</span>
+          </div>
+          ${stepsHTML}
+          <div class="add-step-row">
+            <button class="add-step-btn" onclick="openAddStepModal('${phase.id}','${outcome.id}')">＋ Add a step here</button>
+          </div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="phase-section ${isOpen?'open':''}" id="phase-section-${phase.id}">
+        <div class="phase-section-header ${isOpen?'open':''}" onclick="togglePhase('${phase.id}')">
+          <div class="phase-badge" style="background:${phase.color}">${phase.n}</div>
+          <div class="phase-section-name">
+            <strong>${phase.name}</strong>
+            <span>${phase.desc.slice(0,60)}${phase.desc.length>60?'…':''}</span>
+          </div>
+          <div class="phase-section-progress">
+            <div class="phase-section-pct">${ppct}%</div>
+            <span class="phase-section-frac">${pd}/${pt} steps</span>
+          </div>
+          <svg class="phase-section-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="phase-section-body">${outcomesHTML}</div>
+      </div>`;
+  }).join('');
+
+  return `
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="header-title">🌿 <span>Saudade</span> Tactical Plan</div>
+        <nav class="header-nav">
+          <button class="btn btn-ghost btn-sm" onclick="switchView('dashboard')">← Dashboard</button>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <div class="steps-header">
+        <h1 class="steps-title">All 248 Steps</h1>
+        <div class="steps-filters">${filterBtns}</div>
+      </div>
+      <div>${phaseSections}</div>
+    </main>`;
+}
+
+function renderStepsView() {
+  const app = document.getElementById('app');
+  app.innerHTML = renderStepsHTML();
+  attachEvents();
+  if (liveTimerStepId) updateTimerDisplay();
+}
+
+function openPhase(phaseId) {
+  openPhases.add(phaseId);
+  const el = document.getElementById(`phase-section-${phaseId}`);
+  if (el) {
+    el.classList.add('open');
+    el.querySelector('.phase-section-header').classList.add('open');
+    el.querySelector('.phase-section-body').style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function attachEvents() {
+  // Keyboard: close modal with Escape
+  document.onkeydown = (e) => { if (e.key === 'Escape') { document.getElementById('modal-overlay').classList.remove('open'); } };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Check if any timer was already running when page was closed
+function resumeTimer() {
+  for (const [id, ss] of Object.entries(STATE.steps)) {
+    if (ss.startedAt && !ss.completed) {
+      startLiveTimer(id);
+      break;
+    }
+  }
+}
+
+loadState();
+render();
+resumeTimer();
+</script>
+</body>
+</html>
